@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 17:05:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/09 20:28:31 by rabril-h         ###   ########.fr       */
+/*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
+/*   Updated: 2023/12/09 20:34:10 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/globals.hpp"
+#ifndef SERVER_HPP
+# define SERVER_HPP
 
-int main(int argc, char **argv)
-{
-  
-  if (argc != 3)
-  {
-    std::cout << "Usage: ./ircserv <port> <password>" << std::endl;
-    return (-1);
-  }
+# include "globals.hpp"
 
-  Server server(atoi(argv[1]), argv[2]);
+class Server {
 
-  try {
+  public:
+    Server(int port, const std::string password);
+    ~Server();
+
+    void run();
+
+  private:
     
-    server.run();
-  }
-  catch(const std::exception& e)
-  {
-    std::cerr << e.what() << '\n';
-  }
-  
+    // ? Member private vars
 
-  return (0);
+    bool            _isServerRunning;
+    std::string     _password;
+    int             _port;
 
-}
+    
+
+};
+
+#endif
