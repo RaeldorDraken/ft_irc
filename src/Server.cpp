@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/10 17:59:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:04:46 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,16 @@ void Server::run()
   std::signal(SIGINT, handler); // ? Signal when killing server from keyboard
   while (_isServerRunning)
   {
-    // std::cout << "looping" << std::endl;
+    // ? number of file descriptors for which events have occurred
+    // ? If poll is interrupted by a signal or encounters an error, poll_count may be set to -1
+    int poll_count = poll(this->_pollsfd.data(), this->_openConnections, -1);
+    if (poll_count == -1)
+		{
+      std::cerr << "poll() error: " << std::strerror(errno) << std::endl;
+		} // ? if error
+
+    
+
   }
 
   
