@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/10 18:04:46 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:06:05 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ Server::Server(int port, const std::string password){
 
   this->_pollsfd = std::vector<pollfd>(1); // ?  To be filled by struct pollfd as we add more connections to the pollfd struct
  
-  // this->_isServerRunning = false; // ? exit program
-
   /* 
   ? ======================================
   ? TCP sockets creation
