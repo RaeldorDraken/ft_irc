@@ -29,6 +29,8 @@
 # include <set> // ? set container
 # include <algorithm> // ? functions to be used on ranges of elements (all_of. search, fill, swap, sort, etc...)
 
+# include <cerrno> // ? Linux specific 
+
 # include "Server.hpp"
 
 #endif

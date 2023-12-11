@@ -33,18 +33,18 @@ $(OBJ_DIR)/%.o: %.cpp Makefile
 
 
 all:
-	@$(MAKE) $(NAME) --no-print-directory
+	@$(MAKE) $(NAME) #--no-print-directory
 
 $(NAME):: $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	@$(RM) $(OBJ) $(DEP) --no-print-directory
-	@$(RM) -r $(OBJ_DIR) --no-print-directory
+	@$(RM) $(OBJ) $(DEP) #--no-print-directory
+	@$(RM) -r $(OBJ_DIR) #--no-print-directory
 	@echo "Objects cleaned"
 
 fclean: clean
-	@$(RM) $(NAME) --no-print-directory
+	@$(RM) $(NAME) #--no-print-directory
 	@echo "All compilation files removed"
 
 re:	fclean all
