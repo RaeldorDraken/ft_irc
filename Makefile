@@ -6,7 +6,7 @@
 #    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2023/12/09 17:46:19 by rabril-h         ###   ########.fr        #
+#    Updated: 2023/12/11 19:18:20 by rabril-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ CC = c++
 CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address 
 
 
-FILES = main Server
+FILES = main classes/Server classes/Client
 
 src = $(addsuffix .cpp, $(FILES))
 
-vpath %.cpp src #src/commands
+vpath %.cpp src src/classes #src/commands
 
 OBJ_DIR = bin
 OBJ = $(addprefix $(OBJ_DIR)/, $(src:.cpp=.o))

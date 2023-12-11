@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/10 16:26:35 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:01:07 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@
 # include <cerrno> // ? Linux specific 
 
 # include "Server.hpp"
+# include "Client.hpp"
 
 #endif

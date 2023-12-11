@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/10 17:56:08 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:31:40 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SERVER_HPP
 
 # include "globals.hpp"
+
+class Client;
 
 class Server {
 
@@ -37,8 +39,15 @@ class Server {
     // ? short events;     // Events of interest (input, output, etc.)
     // ? short revents;    // Events that occurred (set by the system)
     // ? };
-    std::vector<pollfd>       _pollsfd;
+    std::vector<pollfd>       _pollsfd; // ? Vector to store all connections via polls
 
+    std::map<int, Client *>   _clients; // ? Map to store a int/fd AND Client * key/pair values
+
+
+
+    protected :
+
+    void                      _destroyClients(void);                     
 
     
     
