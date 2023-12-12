@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/11 20:49:38 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:37:55 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void handler(int signal) {
     // TODO this we need to also destroy anything the destructor will do as well
     // TODO Such as channels or anything else
 
+
+    // ! We need to find a way to make this function part of the class as well as _isServerRunning at the same time it works with signals
+
     
 
 
-} // ? handler function for exiting program via signal (keyboard)
+} // ? handler function for exiting program via signal (keyboard) 
 
 
 
@@ -71,13 +74,10 @@ Server::Server(int port, const std::string password){
   return ;
 }
 
-void Server::_destroyClients(void) {
- 
-}
+
 
 Server::~Server(){
-  std::cout << "\nServer destoyed" << std::endl;
-  
+  std::cout << "\nServer destoyed" << std::endl;  
 
   std::map<int, Client *>::iterator it;
   std::map<int, Client *>::iterator it_end = this->_clients.end();
@@ -90,6 +90,28 @@ Server::~Server(){
 }
 
 
+void Server::_removeClient(Client const &client)
+{
+  // TODO remove Client from any channel!!
+
+  size_t counter = 0;
+
+  while (counter < _pollsfd.size())
+  {
+    if (client.getClientFd() == _pollsfd[counter].fd)
+    {
+        _pollsfd.erase(_pollsfd.begin() + counter);
+        this->_openConnections--;
+        break;
+    }
+    counter++;
+  }
+
+  int targetFd = client.getClientFd();
+  close(targetFd);
+  delete _clients[targetFd];
+  _clients.erase(targetFd);
+}
 
 void Server::run()
 {
@@ -116,6 +138,8 @@ void Server::run()
         {
 					//_newClient();	
           //std::cout << "new client needed with" << std::endl;
+
+          // TODO we can abstract this into a function
 
           struct sockaddr_storage	remotaddr; // ? store the address information of the remote client (IPv4 / IPv6)
           socklen_t				addrlen; // ? store the size of the address structure.
@@ -153,6 +177,8 @@ void Server::run()
           //std::cout << "request needed" << std::endl;
 
 
+          // TODO we can abstract this into a function
+
           char buffer[1024]; // ? store the data received from the client
 
           /**
@@ -168,28 +194,34 @@ void Server::run()
           if (bytesRead == -1)
           {
               std::cerr << "recv() error: " << std::strerror(errno) << std::endl;
-              //break ;
+              break ;
               //return;
           }
           if (bytesRead == 0)
           {
-              // TODO removeClient!
-              //_rmClient(*_clients[this->_pollsfd[caddr_t].fd]);
-              std::cout << "Connection closed" << std::endl; 
-              //break ;             
+              this->_removeClient(*_clients[this->_pollsfd[c].fd]);              
+              break ;             
               //return;
           }
           std::string request(buffer, bytesRead); // ? Make a string out of the current request based on content and length of the request
           
-          std::cout << request << std::endl;
+          
           
           
           // TODO below start with implementing Client methods and getBufer() specially
           // ? concatenate any previously received but unprocessed data with the newly received data
-          //request = _clients[this->_pollsfd[c].fd]->getBuffer() + request; 
-          // std::vector<std::string> aux = _splitByDelimiters(request, "\r\n");
-          // if (aux.size() == 0)
-          //     return ;
+          request = _clients[this->_pollsfd[c].fd]->getBuffer() + request; 
+          std::vector<std::string> tokens = _tokenizeStr(request, "\r\n");
+
+          // ! snippet for printing tokens - remove on production
+          
+          this->_printVector(tokens, "Content is ");       
+
+          if (tokens.size() == 0)
+          {
+              break ;
+              // return ;
+          }
           // for (size_t j = 0; j < aux.size() - 1; ++j)
           //     //_runCmd(_parse(aux[j].c_str(), ' '), this->_pollsfd[i].fd);
           // if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")

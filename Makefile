@@ -6,7 +6,7 @@
 #    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2023/12/11 19:18:20 by rabril-h         ###   ########.fr        #
+#    Updated: 2023/12/12 19:08:26 by rabril-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = c++
 CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address 
 
 
-FILES = main classes/Server classes/Client
+FILES = main classes/Server classes/utils/server classes/Client 
 
 src = $(addsuffix .cpp, $(FILES))
 
