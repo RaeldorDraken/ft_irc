@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 19:16:57 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:34:12 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ class Server {
     std::vector<std::string> _tokenizeStr(std::string const &str, std::string const &bounds); // ? Tokenizes a string based on delimeters such as \n\r to get a clean Client input message so it waits for a proper \r char
     
     void                     _printVector(std::vector<std::string> vec, std::string msg); // ? Prints a vector with on each position with a custom msg
+
+    std::vector<std::string> _buildCommand(std::string str, char c); // ? Build a command based on input and a char which acts as delimiter. We will use space " "
 
 
 

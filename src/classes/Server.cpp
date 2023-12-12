@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 19:37:55 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:44:42 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,24 +213,41 @@ void Server::run()
           request = _clients[this->_pollsfd[c].fd]->getBuffer() + request; 
           std::vector<std::string> tokens = _tokenizeStr(request, "\r\n");
 
-          // ! snippet for printing tokens - remove on production
-          
-          this->_printVector(tokens, "Content is ");       
+          // // ! snippet for printing tokens - remove on production          
+          // this->_printVector(tokens, "Content is "); 
+
+          std::cout << "tokens size is " << tokens.size() << std::endl;      
 
           if (tokens.size() == 0)
           {
+              std::cout << "llego aqui" << std::endl;
               break ;
-              // return ;
+              //return ;
           }
-          // for (size_t j = 0; j < aux.size() - 1; ++j)
-          //     //_runCmd(_parse(aux[j].c_str(), ' '), this->_pollsfd[i].fd);
+
+          /**
+           * ! EMPEZAR POR AQUI. PORQUE tokens.size -1 ???? preguntar joan
+          */
+          
+          
+          for (size_t j = 0; j < tokens.size() - 1; ++j)
+          {
+            //_runCmd(_parse(aux[j].c_str(), ' '), this->_pollsfd[i].fd);
+
+            std::cout << "entro aqui" << std::endl;
+
+            // ! temporary vector to get parsed command
+
+            this->_printVector(this->_buildCommand(tokens[j].c_str(), ' '), " Parsed command is ");
+          }
+              
           // if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")
           // {
-          //     _clients[this->_pollsfd[i].fd]->setBuffer("");
+          //     _clients[this->_pollsfd[c].fd]->setBuffer("");
           //     //_runCmd(_parse(aux[aux.size() - 1].c_str(), ' '), this->_pollsfd[i].fd);    
           // }
           // else
-          //     _clients[this->_pollsfd[i].fd]->setBuffer(aux[aux.size() - 1]);
+          //     _clients[this->_pollsfd[c].fd]->setBuffer(tokens[tokens.size() - 1]);
           
 
         }

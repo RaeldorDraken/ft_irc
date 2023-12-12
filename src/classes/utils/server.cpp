@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:00:29 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 19:10:40 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:29:54 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ std::vector<std::string> Server::_tokenizeStr(std::string const &str, std::strin
         myTokens.push_back(lastToken);
     }
     return myTokens;   
+}
+
+std::vector<std::string> Server::_buildCommand(std::string str, char c)
+{
+  std::vector<std::string> command;
+
+  std::stringstream ss(str);
+  std::string token;
+  while (std::getline(ss, token, c))
+      command.push_back(token);
+
+  return command;
+
 }
 
 void Server::_printVector(std::vector<std::string> vec, std::string msg)
