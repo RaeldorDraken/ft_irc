@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 20:34:12 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:55:45 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class Server {
     void run();
 
   private:
-    
 
     // ? struct pollfd {
     // ? int   fd;         // File descriptor to be monitored
@@ -36,7 +35,7 @@ class Server {
 
 
 
-    // ? Member private vars    
+    // * Member private vars    
 
     //bool                      _isServerRunning;
     std::string               _password; // ? our pass for the server
@@ -47,12 +46,18 @@ class Server {
     std::map<int, Client *>   _clients; // ? Map to store a int/fd AND Client * key/pair values
 
     
-    // ? Private Member functions
+    // * Private Member functions
 
+    // ? comms classes/comms
     void                      _removeClient(Client const &client);
+    void                      _createClient(void);
+    void                      _processClientRequest(int c);
+    
+    
+    // ? execs classes/execs
+    void                      _runCommand(std::vector<std::string> vec, int const clientFd);
 
-
-    // * Utils
+    // * Utils 
 
     std::vector<std::string> _tokenizeStr(std::string const &str, std::string const &bounds); // ? Tokenizes a string based on delimeters such as \n\r to get a clean Client input message so it waits for a proper \r char
     

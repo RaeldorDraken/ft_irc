@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:00:29 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 20:29:54 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/13 19:32:36 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ std::vector<std::string> Server::_tokenizeStr(std::string const &str, std::strin
 {
   std::vector<std::string> myTokens;
 
-  size_t startPos = 0;
-  size_t foundPos;
+  std::string::size_type startPos = 0;
+  std::string::size_type foundPos;
 
     while ((foundPos = str.find_first_of(bounds, startPos)) != std::string::npos) {
         // ? Extract the token between startPos and foundPos
