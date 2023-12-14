@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/13 20:59:47 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:13:37 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void Server::_processClientRequest(int c)
         return ;
 
     // ? Here we tokenize again  
-    for (size_t j = 0; j < tokens.size(); ++j) // ! this could be tokens.size() -1
+    for (size_t j = 0; j < tokens.size() - 1; ++j) // ! this could be tokens.size() -1
     {
       std::vector<std::string> myCommands = this->_buildCommand(tokens[j].c_str(), ' ');
 
@@ -98,11 +98,14 @@ void Server::_processClientRequest(int c)
 
      
     }
+
+
         
     // if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")
     // {
     //     _clients[this->_pollsfd[c].fd]->setBuffer("");
-    //     //_runCmd(_parse(aux[aux.size() - 1].c_str(), ' '), this->_pollsfd[i].fd);    
+    //      std::vector<std::string> myCommands = this->_buildCommand(tokens[c].c_str(), ' ');
+    //     this->_runCommand(myCommands, this->_pollsfd[c].fd);    
     // }
     // else
     //     _clients[this->_pollsfd[c].fd]->setBuffer(tokens[tokens.size() - 1]);
