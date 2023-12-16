@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/14 20:13:37 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:35:11 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,32 +73,43 @@ void Server::_processClientRequest(int c)
     // ? concatenate any previously received but unprocessed data with the newly received data. This first tokenization is useful when recieving more than one line at the same time such as when a client joins the irc or a channel. Otherwise it will be printed all in the same line.
     request = _clients[this->_pollsfd[c].fd]->getBuffer() + request;   
 
-    std::vector<std::string> tokens = _tokenizeStr(request, "\n");
+    std::vector<std::string> tokens = _tokenizeStr(request, "\r\n");
 
     // ! snippet for printing tokens - remove on production          
-    this->_printVector(tokens, "Content of tokenized request is "); 
-
-    std::cout << "tokens size is " << tokens.size() << std::endl;      
+    //this->_printVector(tokens, "Content of tokenized request is ");           
 
     if (tokens.size() == 0)
         return ;
 
-    // ? Here we tokenize again  
-    for (size_t j = 0; j < tokens.size() - 1; ++j) // ! this could be tokens.size() -1
+    //std::cout << "tokens size for line is " << tokens.size() << std::endl;
+
+    // ? Here we tokenize again for every line
+    for (size_t j = 0; j < tokens.size(); ++j) 
     {
       std::vector<std::string> myCommands = this->_buildCommand(tokens[j].c_str(), ' ');
 
-       // ! temporary vector to get parsed command
+      // ! temporary vector to get parsed command
 
-      std::cout << " Token -> { " << j << " }" << std::endl;
+      // std::cout << " Token -> { " << j << " }" << std::endl;
 
-      this->_printVector(myCommands, " Parsed command is ");
+      // this->_printVector(myCommands, " Parsed command is ");
       
       this->_runCommand(myCommands, this->_pollsfd[c].fd);
 
      
     }
 
+
+    // TODO create code to add to buffer in case commands are not properly formated
+
+    if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")
+    {
+      std::cout << "Handling cleaning buffer " << std::endl;
+    }
+    else
+    {
+      std::cout << "Handling setting buffer" << std::endl;
+    }
 
         
     // if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")

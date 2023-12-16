@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/13 20:36:19 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:24:27 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 # include "Server.hpp"
 # include "Client.hpp"
+# include "Commands.hpp"
 
 
 #endif

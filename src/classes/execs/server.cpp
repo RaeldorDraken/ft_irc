@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/14 20:08:43 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:37:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
   const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
 
+  
 
-  (void)clientFd;
+
+  //(void)clientFd;
   
 
 
@@ -37,18 +39,36 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
             it++;
     }
     
-    std::string input = vec[0];
-    size_t size = sizeof(commands) / sizeof(commands[0]);
+  std::string input = vec[0];
+  size_t size = sizeof(commands) / sizeof(commands[0]);
 
-    std::cout << "input es " << input << std::endl;
+  //std::cout << "input es " << input << std::endl;
 
   for (size_t i = 0; i < size; i++)
   {    
     
     if (input == commands[i])
     {
-        std::cout << "handling " << commands[i] << " which is " << input <<std::endl;
-        return ;
+        if (input == "JOIN")
+          Commands::JOIN(clientFd, vec);
+        else if (input == "USER")
+          Commands::USER(clientFd, vec);
+        else if (input == "NICK")
+          Commands::NICK(clientFd, vec);
+        else if (input == "INVITE")
+          Commands::INVITE(clientFd, vec);
+        else if (input == "TOPIC")
+          Commands::TOPIC(clientFd, vec);
+        else if (input == "NAMES")
+          Commands::NAMES(clientFd, vec);
+        else if (input == "MODE")
+          Commands::MODE(clientFd, vec);
+        else if (input == "KICK")
+          Commands::KICK(clientFd, vec);
+        else if (input == "PING")
+          Commands::PING(clientFd, vec);
+        else
+          std::cout << input << " is an unhandled command" << std::endl;
     }
 
   }
