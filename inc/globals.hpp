@@ -6,12 +6,13 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/16 19:24:27 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:25:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBALS_HPP
 # define GLOBALS_HPP
+# pragma once
 
 # include <iostream> // ? standar std::
 # include <limits> // TODO may not be needed
@@ -33,7 +34,9 @@
 
 # include "Server.hpp"
 # include "Client.hpp"
-# include "Commands.hpp"
+# include "ACommand.hpp"
+# include "commands/Join.hpp"
+
 
 
 #endif

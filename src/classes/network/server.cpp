@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/16 19:35:11 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:47:33 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,5 @@ void Server::_processClientRequest(int c)
     //     this->_runCommand(myCommands, this->_pollsfd[c].fd);    
     // }
     // else
-    //     _clients[this->_pollsfd[c].fd]->setBuffer(tokens[tokens.size() - 1]);
+    //     _clients[this->_pollsfd[c].fd]->setBuffer(tokens[tokens.size()]);
 }

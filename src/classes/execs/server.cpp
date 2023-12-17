@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/16 19:37:06 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:29:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
   
 
 
-  //(void)clientFd;
+  (void)clientFd;
   
 
 
@@ -44,31 +44,64 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   //std::cout << "input es " << input << std::endl;
 
+  // TODO make case for PASS here so we can check if this is Client trying to get to server for the first time
+
   for (size_t i = 0; i < size; i++)
   {    
     
     if (input == commands[i])
     {
         if (input == "JOIN")
-          Commands::JOIN(clientFd, vec);
+        {
+         Join join = Join(clientFd, vec);        
+
+        }
         else if (input == "USER")
-          Commands::USER(clientFd, vec);
+        {
+          std::cout << "handling USER on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "NICK")
-          Commands::NICK(clientFd, vec);
+        {
+          std::cout << "handling KICK on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "INVITE")
-          Commands::INVITE(clientFd, vec);
+        {
+          std::cout << "handling INVITEon client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "TOPIC")
-          Commands::TOPIC(clientFd, vec);
+        {
+          std::cout << "handling TOPIC on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "NAMES")
-          Commands::NAMES(clientFd, vec);
+        {
+          std::cout << "handling NAMES on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "MODE")
-          Commands::MODE(clientFd, vec);
+        {
+          std::cout << "handling MODE on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "KICK")
-          Commands::KICK(clientFd, vec);
+        {
+          std::cout << "handling KICK on client [" << clientFd << "] with params :" << std::endl;
+
+        }
         else if (input == "PING")
-          Commands::PING(clientFd, vec);
+        {
+
+          std::cout << "handling PING on client [" << clientFd << "] with params :" << std::endl;
+        }
         else
-          std::cout << input << " is an unhandled command" << std::endl;
+        {
+          std::cout << input << " is an unhandled command" << std::endl;          
+        }
+
+        //this->_printVector(vec, "");
     }
 
   }
