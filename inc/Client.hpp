@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:32:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:30:34 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:27:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ class Client {
     const std::string   &getHostName(void) const;
     const std::string   &getBuffer(void) const;
     int                 getClientFd() const;
-
-    void                getClientsInfo(void) const;
 
   private:
 

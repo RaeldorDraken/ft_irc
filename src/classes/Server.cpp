@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:15:14 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:41:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool _isServerRunning = true;
 void handler(int signal) {
     (void) signal; 
     _isServerRunning = false;
+
+    
 
     // TODO this we need to also destroy anything the destructor will do as well
     // TODO Such as channels or anything else
@@ -79,12 +81,19 @@ Server::Server(int port, const std::string password){
 Server::~Server(){
   std::cout << "\nServer destoyed" << std::endl;  
 
+  
+  // TODO we need to close all fd for all clients here
+
   std::map<int, Client *>::iterator it;
   std::map<int, Client *>::iterator it_end = this->_clients.end();
 
   for (it = this->_clients.begin(); it != it_end; it++)
+  {
+      close(it->first);
       delete (it->second);
-  this->_clients.clear();
+
+  }
+  this->_clients.clear();  
 
   return ;
 }
@@ -146,6 +155,7 @@ void Server::run()
       c++;
     }
   }  
+
 }
 
 int Server::getOpenConnections() const

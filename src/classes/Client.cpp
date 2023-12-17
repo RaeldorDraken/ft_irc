@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:30:53 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:26:28 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Client::Client(int fd) :
 Client::~Client(void)
 {
   std::cout << "Client " << this->_clientFd << " destroyed" << std::endl;
+  //close(this->_clientFd);
 }
 
 void Client::setName(std::string name)
