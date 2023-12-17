@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ACommand.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:05:22 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 18:27:16 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:28:39 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include <vector>
+
+class Server;
 
 class ACommand {
 
@@ -26,11 +28,12 @@ class ACommand {
   
   protected:
 
-    ACommand(int const &clientFd, std::vector<std::string> const &vec);
+    ACommand(int const &clientFd, std::vector<std::string> const &vec, Server *server);
     
     int                         _clientFd;
     std::vector<std::string>    _vec;
     std::string                 _type;
+    Server                      *_server;
 };
 
 #endif

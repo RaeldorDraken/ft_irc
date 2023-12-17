@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:32:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 19:20:33 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:30:34 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CLIENT_HPP
 
 # include "globals.hpp"
+
+class Server;
 
 class Client {
 
@@ -37,6 +39,8 @@ class Client {
     const std::string   &getBuffer(void) const;
     int                 getClientFd() const;
 
+    void                getClientsInfo(void) const;
+
   private:
 
     int                   _clientFd;
@@ -45,7 +49,6 @@ class Client {
     std::string           _nickname;
     std::string           _hostname;
     std::string           _buffer;
-    
 
 
     //std::string     _password;

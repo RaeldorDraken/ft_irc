@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 18:56:49 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:41:01 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     {
         if (input == "JOIN")
         {
-         Join join = Join(clientFd, vec);        
+         Join join = Join(clientFd, vec, this);  
 
         }
         else if (input == "USER")
@@ -64,6 +64,12 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
         else if (input == "NICK")
         {
           std::cout << "handling NICK on client [" << clientFd << "] with params :" << std::endl;
+
+        }
+        else if (input == "PRIVMSG")
+        {
+          Privmsg privmsg = Privmsg(clientFd, vec, this);
+          std::cout << "handling PRIVMSG on client [" << clientFd << "] with params :" << std::endl;
 
         }
         else if (input == "INVITE")

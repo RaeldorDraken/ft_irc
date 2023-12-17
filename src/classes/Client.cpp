@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/12 19:20:40 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:30:53 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Client::Client(int fd) :
   _realname (""),
   _nickname (""),
   _buffer ("")
-
 {
   std::cout << "New client with fd " << this->_clientFd << std::endl;
 }
@@ -77,4 +76,3 @@ int Client::getClientFd() const
 {
   return (this->_clientFd);
 }
-    
