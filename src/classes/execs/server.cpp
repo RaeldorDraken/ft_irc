@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 18:29:06 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:56:49 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
         }
         else if (input == "NICK")
         {
-          std::cout << "handling KICK on client [" << clientFd << "] with params :" << std::endl;
+          std::cout << "handling NICK on client [" << clientFd << "] with params :" << std::endl;
 
         }
         else if (input == "INVITE")
