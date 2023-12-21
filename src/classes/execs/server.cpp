@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/20 10:34:55 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:03:03 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   (void)clientFd;
   
-	// void	(Server::*f[10])(int const client_fd, cmd &info) = \
-	// {&Server::_join, &Server::_user, &Server::_nick, &Server::_privmsg,\
-	//  &Server::_invite, &Server::_topic, &Server::_names,\
+	// void	(Server::*f[10])(int const client_fd, cmd &info) = 
+	// {&Server::_join, &Server::_user, &Server::_nick, &Server::_privmsg,
+	//  &Server::_invite, &Server::_topic, &Server::_names,
 	//  &Server::_mode, &Server::_kick, &Server::_ping};
 
   // ? remove empty
