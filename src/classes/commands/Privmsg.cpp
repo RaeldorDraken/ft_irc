@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:33:28 by eros-gir          #+#    #+#             */
-/*   Updated: 2023/12/17 19:46:25 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:16:58 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 		for (size_t i = 2; i < vec.size(); i++)
 			msg += vec[i] + " ";
 		std::cout << "Sending msg to " << vec[1] << " : " << msg << std::endl;
+	// ! stoi is not in c++98 need to change the function to use another type of conversion
 		sendMsg(clientFd, std::stoi(vec[1]), msg);
 	}
   return ;
@@ -32,7 +33,12 @@ Privmsg::~Privmsg(void) {return ;}
 
 void Privmsg::sendMsg(int const &sender, int const &receiver, std::string const &msg)
 {
-  std::string toSend = ":" + std::to_string(sender) + " PRIVMSG " + std::to_string(receiver) + " :" + msg + "\r\n";
+	// ! to_string is not in c++98, changed the function to use ostringstream
+  std::ostringstream oss1;
+  oss1 << sender;
+  std::ostringstream oss2;
+  oss2 << receiver;
+  std::string toSend = ":" + oss1.str() + " PRIVMSG " + oss2.str() + " :" + msg + "\r\n";
   std::cout << "Sending " << toSend << std::endl;
   send(receiver, toSend.c_str(), toSend.size(), 0);
 }
