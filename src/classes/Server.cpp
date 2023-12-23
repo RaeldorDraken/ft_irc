@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 21:41:21 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:17:07 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,11 @@ Server::~Server(){
   {
       close(it->first);
       delete (it->second);
+      this->_openConnections--;
 
   }
   this->_clients.clear();  
-
+  std::cout << "open connections are " << this->_openConnections << std::endl;
   return ;
 }
 
@@ -119,7 +120,7 @@ void Server::_removeClient(Client const &client)
   int targetFd = client.getClientFd();
   close(targetFd);
   delete _clients[targetFd];
-  _clients.erase(targetFd);
+  _clients.erase(targetFd);  
 }
 
 void Server::run()
@@ -135,6 +136,7 @@ void Server::run()
     if (poll_count == -1)
 		{
       std::cerr << "poll() error: " << std::strerror(errno) << std::endl;
+      break ;
 		} // ? if error
 
     c = 0; // ? Reset counter everytime
