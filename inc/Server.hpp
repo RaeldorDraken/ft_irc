@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:14:52 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:45:04 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "globals.hpp"
 
 class Client;
+class ACommand;
 
 class Server {
 
@@ -45,6 +46,8 @@ class Server {
     int                       _openConnections; // ? open connections
     std::vector<pollfd>       _pollsfd; // ? Vector to store all connections via polls
     std::map<int, Client *>   _clients; // ? Map to store a int/fd AND Client * key/pair values
+
+    // std::vector<ACommand *>    _commands; // ? vector to include any commands including servers
 
     
     // * Private Member functions

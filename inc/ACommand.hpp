@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ACommand.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:05:22 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:28:39 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/17 20:44:30 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <vector>
+# include "ACommand.hpp"
 
 class Server;
 
