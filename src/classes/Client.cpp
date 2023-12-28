@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 21:26:28 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:41:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,10 @@ const std::string &Client::getBuffer() const
 int Client::getClientFd() const
 {
   return (this->_clientFd);
+}
+
+void Client::sendMessage(const std::string &msg) const
+{
+    std::string message = msg + "\r\n";
+    send(this->_clientFd, message.c_str(), message.size(), 0);
 }

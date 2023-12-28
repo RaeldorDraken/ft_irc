@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 21:45:04 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:27:16 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ class Server {
     Server(int port, const std::string password);
     ~Server();
     int getOpenConnections() const;
+
+    // ? This function is needed from Pong command
+    std::map<int, Client *> getClients() const;
+
 
     void run();
 

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/23 20:17:07 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:29:09 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,9 @@ void Server::run()
 int Server::getOpenConnections() const
 {
   return (this->_openConnections);
+}
+
+std::map<int, Client *> Server::getClients() const
+{
+  return this->_clients;
 }

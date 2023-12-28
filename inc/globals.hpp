@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:40:09 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:32:49 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@
 # include "ACommand.hpp"
 # include "commands/Join.hpp"
 # include "commands/Privmsg.hpp"
+# include "commands/Ping.hpp"
+# include "commands/Invite.hpp"
+# include "commands/Kick.hpp"
+# include "commands/Mode.hpp"
+# include "commands/Names.hpp"
+# include "commands/Nick.hpp"
+# include "commands/Topic.hpp"
+# include "commands/User.hpp"
+
+
+// TODO pong command is a bit different and weird to handle with ACommand. Maybe we should integrate it directly on the Server as method
+
+# include "commands/Pong.hpp"
 
 
 
