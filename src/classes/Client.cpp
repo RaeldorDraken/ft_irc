@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 21:26:28 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/28 09:46:11 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Client::Client(int fd) : 
   _clientFd (fd), 
+  _isRegistered (false),
   _name (""),
   _realname (""),
   _nickname (""),
@@ -53,6 +54,11 @@ void Client::setBuffer(std::string buff)
   this->_buffer = buff; 
 }
 
+void Client::setRegistered(bool isRegistered)
+{
+  this->_isRegistered = isRegistered;
+}
+
 const std::string &Client::getName() const
 {
   return (this->_name);
@@ -76,4 +82,9 @@ const std::string &Client::getBuffer() const
 int Client::getClientFd() const
 {
   return (this->_clientFd);
+}
+
+bool Client::getRegistered() const
+{
+  return (this->_isRegistered);
 }

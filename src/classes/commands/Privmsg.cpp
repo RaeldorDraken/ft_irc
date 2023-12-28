@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:33:28 by eros-gir          #+#    #+#             */
-/*   Updated: 2023/12/21 10:16:58 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 09:46:32 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 			msg += vec[i] + " ";
 		std::cout << "Sending msg to " << vec[1] << " : " << msg << std::endl;
 	// ! stoi is not in c++98 need to change the function to use another type of conversion
-		sendMsg(clientFd, std::stoi(vec[1]), msg);
+//		sendMsg(clientFd, std::stoi(vec[1]), msg);
 	}
   return ;
 }

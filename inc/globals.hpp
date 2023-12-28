@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 19:40:09 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 09:53:52 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "ACommand.hpp"
 # include "commands/Join.hpp"
 # include "commands/Privmsg.hpp"
+# include "commands/Pass.hpp"
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/21 10:03:03 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 09:54:22 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
 
   size_t icomm = 0;
-
-  (void)clientFd;
   
 	// void	(Server::*f[10])(int const client_fd, cmd &info) = 
 	// {&Server::_join, &Server::_user, &Server::_nick, &Server::_privmsg,
@@ -41,6 +39,29 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   //std::cout << "input es " << input << std::endl;
 
+  if (_clients[clientFd]->getRegistered() == false && input != "PASS")
+  {
+    std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
+    return ;
+  }
+  else if (_clients[clientFd]->getRegistered() == false && input == "PASS")
+  {
+    std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
+    Pass pass = Pass(clientFd, vec, this);
+    return ;
+  }
+  else if (_clients[clientFd]->getRegistered() == true && input == "PASS")
+  {
+    std::cout << "Client [" << clientFd << "] is already registered" << std::endl;
+    return ;
+  }
+  else
+  {
+    //Handle Username and Nickname and all that
+    std::cout << "Client [" << clientFd << "] is registered" << std::endl;
+  }
+
+  
   // TODO make case for PASS here so we can check if this is Client trying to get to server for the first time
 
   while (icomm < size)
