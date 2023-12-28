@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:50:32 by eros-gir          #+#    #+#             */
-/*   Updated: 2023/12/28 09:59:44 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 10:15:17 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ Pass::~Pass(void) {return ;}
 
 void Pass::runCmd()
 {
+  Client *client = this->_server->getClients()[this->_clientFd];
+
   if (this->_vec.size() != 2)
   {
 	std::cout << "Error: Wrong number of arguments" << std::endl;
 	return ;
   }
-  else if (this->_vec[1] != this->server->getPassword())
+  else if (this->_vec[1] != _server->getPassword())
   {
 	std::cout << "Error: Wrong password" << std::endl;
-	delete [this->server->getClients()[this->_clientFd]];
 	return ;
   }
   else

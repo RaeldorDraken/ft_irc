@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:43:58 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/28 10:11:57 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ class Server {
     Server(int port, const std::string password);
     ~Server();
     int getOpenConnections() const;
+    std::string getPassword() const;
+    std::map<int, Client *> getClients() const;
 
     void run();
 
