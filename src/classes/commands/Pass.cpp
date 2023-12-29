@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/commands/Pass.hpp"
+#include "../../../inc/commands/Pass.hpp"
 
 Pass::Pass(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
 	Client *client = this->_server->getClients()[this->_clientFd];
+
+	(void) client;
 
 	if (this->_vec.size() != 2)
 	{

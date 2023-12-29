@@ -17,8 +17,8 @@
 
 class Pass : public ACommand {
   public:
-	Pass(int const &clientFd, std::vector<std::string> const &vec, Server *server);
-	~Pass(void);
+		Pass(int const &clientFd, std::vector<std::string> const &vec, Server *server);
+		~Pass(void);
 };
 
 #endif
