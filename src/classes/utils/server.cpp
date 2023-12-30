@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:00:29 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 10:12:11 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:19:41 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,23 @@ std::string Server::getPassword() const
 std::map<int, Client *> Server::getClients() const
 {
   return this->_clients;
+}
+
+int ft_stoi(std::string str)
+{
+  int num = 0;
+  int sign = 1;
+  int i = 0;
+
+  if (str[i] == '-')
+  {
+    sign = -1;
+    i++;
+  }
+  while (str[i] != '\0')
+  {
+    num = num * 10 + str[i] - '0';
+    i++;
+  }
+  return (sign * num);
 }

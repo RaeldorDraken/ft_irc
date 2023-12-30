@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 10:11:57 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:19:24 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,4 @@ class Server {
 #endif
 
  void                      handler(int signal);
+ int                       ft_stoi(std::string str);

@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:50:32 by eros-gir          #+#    #+#             */
-/*   Updated: 2023/12/28 10:24:52 by eros-gir         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:31:13 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,17 @@ Pass::Pass(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 	}
 	else
 	{
-	// TODO if password is correct, set client as registered
+	std::cout << "Password correct" << std::endl;
+	server->getClients()[this->_clientFd]->setRegistered(true);
+	// TODO if password is correct, send welcome message
+	std::vector<std::string> vec;
+	std::ostringstream oss2;
+  	oss2 << this->_clientFd;
+	vec.push_back("PRIVMSG");
+	vec.push_back(oss2.str());
+	vec.push_back("Welcome to irc chat!");
+	Privmsg *privmsg = new Privmsg(3, vec, this->_server);
+	delete privmsg;
 	}
 	return ;
 }
