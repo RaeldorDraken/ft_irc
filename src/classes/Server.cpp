@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 19:29:09 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:33:50 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ Server::Server(int port, const std::string password){
 
   _pollsfd[0].fd = serverSocket; // ? Assing first slot of vector to the server. This will increase as we add more connections
   _pollsfd[0].events = POLLIN; // ? Listen for incoming requests
+
+  // ? Set Server Creation datetime
+  
+  std::time_t currentTime = std::time(nullptr);
+  char timeString[100];
+  std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+
+  this->_serverCreationTime = timeString;
   
   return ;
 }
@@ -168,4 +176,9 @@ int Server::getOpenConnections() const
 std::map<int, Client *> Server::getClients() const
 {
   return this->_clients;
+}
+
+std::string Server::getServerCreationTime() const
+{
+  return this->_serverCreationTime;
 }

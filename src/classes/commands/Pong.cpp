@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:44:10 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 19:38:19 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:00:49 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Pong::Pong(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
+  // ? Get to know which client is executing the command
+  
   std::map<int, Client *> _myClients = server->getClients();
   
   
@@ -27,7 +29,7 @@ Pong::Pong(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   // std::cout << "my target has the following fd " << target->getClientFd() << std::endl;
 
-  // ? Here our vec is a custom vector made of just the token send by PING command!!!
+  // ? Here our vec is a custom vector made of just the token send by PING command not the arguments passed via normal execution!!!
 
   if (vec.size() == 1)
   {

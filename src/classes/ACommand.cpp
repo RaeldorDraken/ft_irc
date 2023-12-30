@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:22 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 20:47:11 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:58:22 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ACommand::ACommand(int const &clientFd, std::vector<std::string> const &vec, Ser
     for (ssize_t i = 0; i < 10; i++)
     {
       if (vec[0] == commands[i])
-        match = true;
+        match = true; 
     }
 
     if (!match)
