@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:46:11 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:52:19 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ const std::string &Client::getName() const
 const std::string &Client::getNickName() const
 {
   return (this->_nickname);
+}
+
+const std::string &Client::getRealName() const
+{
+  return (this->_realname);
 }
 
 const std::string &Client::getHostName() const

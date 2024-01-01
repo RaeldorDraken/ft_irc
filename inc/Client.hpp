@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:32:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:29:57 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:52:09 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Client {
     
     const std::string   &getName(void) const;
     const std::string   &getNickName(void) const;
+    const std::string   &getRealName(void) const;
     const std::string   &getHostName(void) const;
     const std::string   &getBuffer(void) const;
     int                 getClientFd() const;

@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:54:22 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:07:26 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 {
   const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
+  
+  const std::string logincmds[3] = {"NAME", "REAL", "NICK"};
 
   size_t icomm = 0;
   
@@ -61,15 +63,40 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     std::cout << "Client [" << clientFd << "] is registered" << std::endl;
   }
 
-  
-  // TODO make case for PASS here so we can check if this is Client trying to get to server for the first time
+  if (_clients[clientFd]->getName() == ""
+  || _clients[clientFd]->getNickName() == "" 
+  || _clients[clientFd]->getRealName() == "")
+  {
+      while (icomm < size)
+    {
+      if (input == logincmds[icomm])
+          break;
+      icomm++;
+    }
+    switch (icomm)
+    {
+      case 0: { // NAME
+        Name name = Name(clientFd, vec, this);  
+      }  break;
+      case 1: { // REAL
+        Real real = Real(clientFd, vec, this);
+      } break;
+      case 2: { // NICK
+        Nick nick = Nick(clientFd, vec, this);
+      } break;
+      default: {
+        std::cout << input << " is an unhandled command" << std::endl;
+      } break;
+    }
+    std::cout << "Client [" << clientFd << "] has yet not been set up" << std::endl;
+    return ;
+  }
 
   while (icomm < size)
   {
     if (input == commands[icomm])
         break;
     icomm++;
-
   }
   switch (icomm)
   {

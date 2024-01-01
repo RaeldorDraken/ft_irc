@@ -6,7 +6,7 @@
 #    By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2023/12/17 19:45:34 by eros-gir         ###   ########.fr        #
+#    Updated: 2024/01/01 13:39:03 by eros-gir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ CC = c++
 CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address 
 
 
-FILES = main classes/Server classes/network/server classes/execs/server classes/utils/server classes/Client classes/ACommand classes/commands/Join classes/commands/Privmsg classes/commands/Pass
+FILES = main classes/Server classes/network/server classes/execs/server \
+classes/utils/server classes/Client classes/ACommand classes/commands/Join \
+classes/commands/Privmsg classes/commands/Pass classes/commands/Nick \
+classes/commands/Real classes/commands/Name
 
 src = $(addsuffix .cpp, $(FILES))
 
