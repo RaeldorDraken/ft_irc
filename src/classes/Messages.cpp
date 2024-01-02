@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:08:34 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/31 19:20:16 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/02 19:21:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,4 +193,19 @@ std::string Messages::printNoTextToSend(std::string client)
 std::string Messages::getUserAwayMessage(std::string client, std::string nickname, std::string message)
 {
   return (std::string("301 ") + client + " " + nickname + " :" + message);
+}
+
+std::string Messages::getUnknownModeChar(std::string client, std::string modechar)
+{
+  return(std::string("472 ") + client + " " + modechar + " :is unknown mode char to me");
+}
+
+std::string Messages::getInviteOnlyChannel(std::string client, std::string channel)
+{
+  return (std::string("473 ") + client + " " + channel + " :Cannot join channel (+i)");
+}
+
+std::string Messages::getUnknownModeFlag(std::string client)
+{
+  return (std::string("501 ") + client + " :Unknown MODE flag");
 }

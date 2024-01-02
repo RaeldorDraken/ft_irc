@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:04:19 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/31 19:21:01 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/02 20:07:00 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ class Messages {
 
     // ? CODE 471
 
-    static std::string      printChannelIsFull(std::string client, std::string channel);
+    static std::string      printChannelIsFull(std::string client, std::string channel); // ? This is for 
 
     // ? CODE 476
 
@@ -173,7 +173,21 @@ class Messages {
 
     static std::string      getUserAwayMessage(std::string client, std::string nickname, std::string message);
 
-    // TODO Faltan MODE REPLIES
+    // * MODE CODES
+
+
+    // ? CODE 472
+
+    static std::string      getUnknownModeChar(std::string client, std::string modechar); // ? channel modes not recognized by server
+    
+    
+    // ? CODE 473
+
+    static std::string      getInviteOnlyChannel(std::string client, std::string channel);
+
+    // ? CODE 501
+
+    static std::string      getUnknownModeFlag(std::string client); // ? user mode flag not recognized by server
  
 
   private :
