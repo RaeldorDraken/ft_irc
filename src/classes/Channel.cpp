@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 20:47:46 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 20:59:15 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ Channel::Channel(std::string const &name, Client const &client, Server *server)
   _server = server;
   _name =  name;
   _topic = "";  
-  _members = std::set<ssize_t>();
-  _invited = std::set<ssize_t>();
-  _operators = std::set<ssize_t>();
+  _members = std::set<int>();
+  _invited = std::set<int>();
+  _operators = std::set<int>();
   _i = false;
   _t = false;
   _k = false;
