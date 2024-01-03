@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 20:33:13 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:20:42 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Server {
     int                     getOpenConnections() const;
 
     // ? This function is needed from Pong command
-    std::map<int, Client *> getClients() const;
+    Client *                getClientByFd(int fd);
     std::string             getServerCreationTime() const;
 
 

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 20:22:05 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 20:22:47 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # include "Server.hpp"
 # include "Client.hpp"
+# include "Channel.hpp"
 # include "ACommand.hpp"
 # include "Messages.hpp"
 # include "commands/Join.hpp"

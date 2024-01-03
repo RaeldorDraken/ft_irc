@@ -6,7 +6,7 @@
 #    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2023/12/30 20:00:14 by rabril-h         ###   ########.fr        #
+#    Updated: 2024/01/03 20:22:16 by rabril-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = c++
 CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address 
 
 
-FILES = main classes/Server classes/network/server classes/execs/server classes/utils/server classes/Client classes/ACommand classes/commands/Join classes/commands/Privmsg classes/commands/Ping classes/commands/Pong classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names classes/commands/Nick classes/commands/Topic classes/commands/User classes/Messages
+FILES = main classes/Server classes/network/server classes/execs/server classes/utils/server classes/Client classes/Channel classes/ACommand classes/commands/Join classes/commands/Privmsg classes/commands/Ping classes/commands/Pong classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names classes/commands/Nick classes/commands/Topic classes/commands/User classes/Messages
 
 src = $(addsuffix .cpp, $(FILES))
 

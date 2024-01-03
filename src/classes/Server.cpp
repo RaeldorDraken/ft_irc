@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 20:33:50 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:21:37 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,9 +173,13 @@ int Server::getOpenConnections() const
   return (this->_openConnections);
 }
 
-std::map<int, Client *> Server::getClients() const
+Client *Server::getClientByFd(int fd)
 {
-  return this->_clients;
+  std::map<int, Client *>::iterator it;
+  for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
+      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
+  }
+  return nullptr;  // ? Return nullptr if not found
 }
 
 std::string Server::getServerCreationTime() const
