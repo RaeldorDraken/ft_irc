@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:27:20 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 20:59:09 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:00:54 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ class Channel {
 
     // ? Cons We will need to iterate sets since indexing is not supported...
 
-    std::set<int>   _members; // ? number of members in the channel
-    std::set<int>   _invited; // ? number of invites in the channel set by +i MODE
-    std::set<int>   _operators; // ? number of operators in the channel set by +o MODE
+    std::set<int>   _members; // ? fds of members in the channel
+    std::set<int>   _invited; // ? fds of invites in the channel set by +i MODE
+    std::set<int>   _operators; // ? fds of operators in the channel set by +o MODE
 
     // ? Boolean for MODES
 
