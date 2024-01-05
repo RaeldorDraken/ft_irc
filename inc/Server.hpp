@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 21:45:04 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:19:24 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ class Server {
     Server(int port, const std::string password);
     ~Server();
     int getOpenConnections() const;
+    std::string getPassword() const;
+    std::map<int, Client *> getClients() const;
 
     void run();
 
@@ -85,3 +87,4 @@ class Server {
 #endif
 
  void                      handler(int signal);
+ int                       ft_stoi(std::string str);
