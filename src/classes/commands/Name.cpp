@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Name.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 12:56:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/01 13:34:58 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:29:39 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Name::Name(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  Client *client = this->_server->getClients()[this->_clientFd];
+  Client *client = this->_server->getClientByFd(this->_clientFd);
   if (client->getRegistered() == false)
   {
 	std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;

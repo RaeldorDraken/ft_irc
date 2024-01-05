@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pass.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:50:32 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/01 13:34:55 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:35:07 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 Pass::Pass(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-	Client *client = this->_server->getClients()[this->_clientFd];
-
-	(void) client;
+	Client *client = this->_server->getClientByFd(this->_clientFd);
 
 	if (this->_vec.size() != 2)
 	{
@@ -32,7 +30,7 @@ Pass::Pass(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 	else
 	{
 	std::cout << "Password correct" << std::endl;
-	server->getClients()[this->_clientFd]->setRegistered(true);
+	client->setRegistered(true);
 	// TODO if password is correct, send welcome message
 	std::vector<std::string> vec;
 	std::ostringstream oss2;

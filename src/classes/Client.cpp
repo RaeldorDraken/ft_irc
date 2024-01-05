@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/01 12:52:19 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:34:27 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void Client::sendMessage(const std::string &msg) const
 {
     std::string message = msg + "\r\n";
     send(this->_clientFd, message.c_str(), message.size(), 0);
+}
 
 bool Client::getRegistered() const
 {

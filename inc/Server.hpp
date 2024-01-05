@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 19:20:42 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:33:12 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ class Server {
     Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
     std::string             getServerCreationTime() const;
 
-
-    int getOpenConnections() const;
     std::string getPassword() const;
-    std::map<int, Client *> getClients() const;
+
 
 
     void run();

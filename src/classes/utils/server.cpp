@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:00:29 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 12:19:41 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:33:58 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ void Server::_printVector(std::vector<std::string> vec, std::string msg)
 std::string Server::getPassword() const
 {
   return this->_password;
-}
-
-std::map<int, Client *> Server::getClients() const
-{
-  return this->_clients;
 }
 
 int ft_stoi(std::string str)

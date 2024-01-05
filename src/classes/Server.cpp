@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 19:21:37 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:54:32 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ Server::~Server(){
 void Server::_removeClient(Client const &client)
 {
   // TODO remove Client from any channel!!
+
+  std::cout << "Entro aqui" << std::endl;
 
   size_t counter = 0;
 
