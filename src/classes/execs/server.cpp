@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/01 13:07:26 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:21:35 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   if (_clients[clientFd]->getRegistered() == false && input != "PASS")
   {
-    std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
+    //std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
+    this->getClientByFd(clientFd)->sendMessage("You are not registered yet");
     return ;
   }
   else if (_clients[clientFd]->getRegistered() == false && input == "PASS")
