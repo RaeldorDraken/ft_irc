@@ -42,6 +42,8 @@ class Client {
     int                 getClientFd() const;
     bool                getRegistered() const;
 
+    void                sendMessage(const std::string &msg) const;
+
   private:
 
     int                   _clientFd;

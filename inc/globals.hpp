@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/01 13:03:29 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/03 20:22:47 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <iostream> // ? standar std::
 # include <limits> // TODO may not be needed
+# include <ctime> // ? Standard C datetime library
 # include <sstream> // ? string stream classes
 # include <cstring> // ? legacy abstract base class used for bidirectional I/O
 # include <csignal> // ? signals cpp
@@ -34,14 +35,28 @@
 
 # include "Server.hpp"
 # include "Client.hpp"
+# include "Channel.hpp"
 # include "ACommand.hpp"
+# include "Messages.hpp"
 # include "commands/Join.hpp"
 # include "commands/Privmsg.hpp"
+# include "commands/Ping.hpp"
+# include "commands/Invite.hpp"
+# include "commands/Kick.hpp"
+# include "commands/Mode.hpp"
+# include "commands/Names.hpp"
+# include "commands/Nick.hpp"
+# include "commands/Topic.hpp"
+# include "commands/User.hpp"
 # include "commands/Pass.hpp"
 # include "commands/Name.hpp"
 # include "commands/Real.hpp"
 # include "commands/Nick.hpp"
 
 
+
+// TODO pong command is a bit different and weird to handle with ACommand. Maybe we should integrate it directly on the Server as method
+
+# include "commands/Pong.hpp"
 
 #endif

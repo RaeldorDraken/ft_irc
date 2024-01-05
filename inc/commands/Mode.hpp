@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Join.cpp                                           :+:      :+:    :+:   */
+/*   Mode.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/01 13:34:59 by eros-gir         ###   ########.fr       */
+/*   Created: 2023/12/28 20:23:55 by rabril-h          #+#    #+#             */
+/*   Updated: 2023/12/28 20:24:28 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/commands/Join.hpp"
+#ifndef MODE_HPP
+# define MODE_HPP
 
-Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
-{  
-  std::cout << server->getOpenConnections() << std::endl;
-  return ;
-}
+# include "../globals.hpp"
 
-Join::~Join(void) {return ;}
+class Mode : public ACommand {
+  public:
+    Mode(int const &clientFd, std::vector<std::string> const &vec, Server *server);
+    ~Mode(void);
+};
+
+#endif

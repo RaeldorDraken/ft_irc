@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Join.cpp                                           :+:      :+:    :+:   */
+/*   Invite.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/01 13:34:59 by eros-gir         ###   ########.fr       */
+/*   Created: 2023/12/28 19:51:15 by rabril-h          #+#    #+#             */
+/*   Updated: 2023/12/28 19:53:12 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/commands/Join.hpp"
+#include "../../../inc/commands/Invite.hpp"
 
-Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
-{  
-  std::cout << server->getOpenConnections() << std::endl;
-  return ;
+Invite::Invite(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
+{
+  (void)server;
+  (void)vec;
+
+  std::cout << "Invite command created with passed clientFd of " << clientFd << std::endl;
+    
 }
 
-Join::~Join(void) {return ;}
+Invite::~Invite(void) {return ;}

@@ -14,7 +14,14 @@
 
 Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  Client *client = this->_server->getClients()[this->_clientFd];
+  (void)server;
+  (void)vec;
+  std::cout << "Nick command created with passed clientFd of " << clientFd << std::endl;
+    
+}
+
+Nick::~Nick(void) {return ;}
+  Client *client = this->_server->getClientByFd(this->clientFd);
   if (client->getRegistered() == false)
   {
   std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
@@ -34,3 +41,4 @@ Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 }
 
 Nick::~Nick(void) {return ;}
+

@@ -104,32 +104,39 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
       Join join = Join(clientFd, vec, this);  
     }  break;
     case 1: { // USER
-        std::cout << "handling USER on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling USER on client [" << clientFd << "] with params :" << std::endl;
+      User user = User(clientFd, vec, this);
     } break;
     case 2: { // NICK
-        std::cout << "handling NICK on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling NICK on client [" << clientFd << "] with params :" << std::endl;
+        Nick nick = Nick(clientFd, vec, this);
     } break;
     case 3: { // PRIVMSG
         Privmsg privmsg = Privmsg(clientFd, vec, this);
-        std::cout << "handling PRIVMSG on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling PRIVMSG on client [" << clientFd << "] with params :" << std::endl;
     } break;
     case 4: { // INVITE
-        std::cout << "handling INVITE on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling INVITE on client [" << clientFd << "] with params :" << std::endl;
+        Invite invite = Invite(clientFd, vec, this);
     } break;
     case 5: { // TOPIC
-        std::cout << "handling TOPIC on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling TOPIC on client [" << clientFd << "] with params :" << std::endl;
+        Topic topic = Topic(clientFd, vec, this);
     } break;
     case 6: { // NAMES
-        std::cout << "handling NAMES on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling NAMES on client [" << clientFd << "] with params :" << std::endl;
+        Names names = Names(clientFd, vec, this);
     } break;
     case 7: { // MODE
-        std::cout << "handling MODE on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling MODE on client [" << clientFd << "] with params :" << std::endl;
+        Mode mode = Mode(clientFd, vec, this);
     } break;
     case 8: { // KICK
-        std::cout << "handling KICK on client [" << clientFd << "] with params :" << std::endl;
+        // std::cout << "handling KICK on client [" << clientFd << "] with params :" << std::endl;
+        Kick kick = Kick(clientFd, vec, this);
     } break;
     case 9: { // PING
-        std::cout << "handling PING on client [" << clientFd << "] with params :" << std::endl;
+        Ping ping = Ping(clientFd, vec, this);
     } break;
     default: {
         std::cout << input << " is an unhandled command" << std::endl;

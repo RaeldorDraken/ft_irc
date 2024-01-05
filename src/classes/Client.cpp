@@ -89,7 +89,13 @@ int Client::getClientFd() const
   return (this->_clientFd);
 }
 
+void Client::sendMessage(const std::string &msg) const
+{
+    std::string message = msg + "\r\n";
+    send(this->_clientFd, message.c_str(), message.size(), 0);
+
 bool Client::getRegistered() const
 {
   return (this->_isRegistered);
+
 }

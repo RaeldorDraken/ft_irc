@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 12:19:24 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:20:42 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,17 @@ class Server {
   public:
     Server(int port, const std::string password);
     ~Server();
+    int                     getOpenConnections() const;
+
+    // ? This function is needed from Pong command
+    Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
+    std::string             getServerCreationTime() const;
+
+
     int getOpenConnections() const;
     std::string getPassword() const;
     std::map<int, Client *> getClients() const;
+
 
     void run();
 
@@ -50,6 +58,8 @@ class Server {
     std::map<int, Client *>   _clients; // ? Map to store a int/fd AND Client * key/pair values
 
     // std::vector<ACommand *>    _commands; // ? vector to include any commands including servers
+
+    std::string               _serverCreationTime;
 
     
     // * Private Member functions

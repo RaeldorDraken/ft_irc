@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/23 20:17:07 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:21:37 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ Server::Server(int port, const std::string password){
 
   _pollsfd[0].fd = serverSocket; // ? Assing first slot of vector to the server. This will increase as we add more connections
   _pollsfd[0].events = POLLIN; // ? Listen for incoming requests
+
+  // ? Set Server Creation datetime
+  
+  std::time_t currentTime = std::time(nullptr);
+  char timeString[100];
+  std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+
+  this->_serverCreationTime = timeString;
   
   return ;
 }
@@ -163,4 +171,18 @@ void Server::run()
 int Server::getOpenConnections() const
 {
   return (this->_openConnections);
+}
+
+Client *Server::getClientByFd(int fd)
+{
+  std::map<int, Client *>::iterator it;
+  for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
+      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
+  }
+  return nullptr;  // ? Return nullptr if not found
+}
+
+std::string Server::getServerCreationTime() const
+{
+  return this->_serverCreationTime;
 }
