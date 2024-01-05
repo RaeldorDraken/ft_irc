@@ -17,7 +17,13 @@ CC = c++
 CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address 
 
 
-FILES = main classes/Server classes/network/server classes/execs/server classes/utils/server classes/Client classes/Channel classes/ACommand classes/commands/Join classes/commands/Privmsg classes/commands/Ping classes/commands/Pong classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names classes/commands/Nick classes/commands/Topic classes/commands/User classes/Messages
+FILES = main classes/Server classes/network/server classes/execs/server \
+classes/utils/server classes/Client classes/Channel classes/ACommand classes/commands/Join \
+classes/commands/Privmsg classes/commands/Pass classes/commands/Nick \
+classes/commands/Real classes/commands/Name classes/commands/Ping classes/commands/Pong \ 
+classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names \ 
+classes/commands/Nick classes/commands/Topic classes/commands/User classes/Messages
+
 
 src = $(addsuffix .cpp, $(FILES))
 

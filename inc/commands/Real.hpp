@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Nick.hpp                                           :+:      :+:    :+:   */
+/*   Real.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NICK_HPP
-# define NICK_HPP
+#ifndef REAL_HPP
+# define REAL_HPP
 
 # include "../globals.hpp"
 
-class Nick : public ACommand
+class Real : public ACommand
 {
   public:
-	Nick(int const &clientFd, std::vector<std::string> const &vec, Server *server);
-	~Nick(void);
+	Real(int const &clientFd, std::vector<std::string> const &vec, Server *server);
+	~Real(void);
 };
 
 #endif

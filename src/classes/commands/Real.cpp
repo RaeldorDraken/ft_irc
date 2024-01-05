@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Nick.cpp                                           :+:      :+:    :+:   */
+/*   Real.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 12:56:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/01 13:34:57 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:34:53 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/commands/Nick.hpp"
+#include "../../../inc/commands/Real.hpp"
 
-Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
+Real::Real(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  (void)server;
-  (void)vec;
-  std::cout << "Nick command created with passed clientFd of " << clientFd << std::endl;
-    
-}
-
-Nick::~Nick(void) {return ;}
-  Client *client = this->_server->getClientByFd(this->clientFd);
+  Client *client = this->_server->getClients()[this->_clientFd];
   if (client->getRegistered() == false)
   {
   std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
@@ -34,11 +27,10 @@ Nick::~Nick(void) {return ;}
   }
   else
   {
-  client->setNickName(vec[1]);
-  std::cout << "Client [" << clientFd << "] nick is now " << client->getNickName() << std::endl;
+  client->setRealName(vec[1]);
+  std::cout << "Client [" << clientFd << "] real is now " << client->getRealName() << std::endl;
   }
   return ;
 }
 
-Nick::~Nick(void) {return ;}
-
+Real::~Real(void) {return ;}

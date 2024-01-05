@@ -48,6 +48,11 @@
 # include "commands/Nick.hpp"
 # include "commands/Topic.hpp"
 # include "commands/User.hpp"
+# include "commands/Pass.hpp"
+# include "commands/Name.hpp"
+# include "commands/Real.hpp"
+# include "commands/Nick.hpp"
+
 
 
 // TODO pong command is a bit different and weird to handle with ACommand. Maybe we should integrate it directly on the Server as method

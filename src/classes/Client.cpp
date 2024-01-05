@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 19:41:21 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:52:19 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Client::Client(int fd) : 
   _clientFd (fd), 
+  _isRegistered (false),
   _name (""),
   _realname (""),
   _nickname (""),
@@ -53,6 +54,11 @@ void Client::setBuffer(std::string buff)
   this->_buffer = buff; 
 }
 
+void Client::setRegistered(bool isRegistered)
+{
+  this->_isRegistered = isRegistered;
+}
+
 const std::string &Client::getName() const
 {
   return (this->_name);
@@ -61,6 +67,11 @@ const std::string &Client::getName() const
 const std::string &Client::getNickName() const
 {
   return (this->_nickname);
+}
+
+const std::string &Client::getRealName() const
+{
+  return (this->_realname);
 }
 
 const std::string &Client::getHostName() const
@@ -82,4 +93,9 @@ void Client::sendMessage(const std::string &msg) const
 {
     std::string message = msg + "\r\n";
     send(this->_clientFd, message.c_str(), message.size(), 0);
+
+bool Client::getRegistered() const
+{
+  return (this->_isRegistered);
+
 }

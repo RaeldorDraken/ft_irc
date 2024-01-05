@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:32:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 19:41:09 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:52:09 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,28 @@ class Client {
     void                setNickName(std::string nickname);
     void                setHostName(std::string hostname);
     void                setBuffer(std::string buff); 
+    void                setRegistered(bool isRegistered);
     
     
     const std::string   &getName(void) const;
     const std::string   &getNickName(void) const;
+    const std::string   &getRealName(void) const;
     const std::string   &getHostName(void) const;
     const std::string   &getBuffer(void) const;
     int                 getClientFd() const;
+    bool                getRegistered() const;
 
     void                sendMessage(const std::string &msg) const;
 
   private:
 
     int                   _clientFd;
+    bool                  _isRegistered;
     std::string           _name;
     std::string           _realname;
     std::string           _nickname;
     std::string           _hostname;
     std::string           _buffer;
-
 
     //std::string     _password;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:00:29 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/17 17:09:49 by rabril-h         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:19:41 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,31 @@ void Server::_printVector(std::vector<std::string> vec, std::string msg)
       std::cout << "[" << i << "] : " << msg << " -> " << vec[i] << std::endl;
 }
 
+std::string Server::getPassword() const
+{
+  return this->_password;
+}
+
+std::map<int, Client *> Server::getClients() const
+{
+  return this->_clients;
+}
+
+int ft_stoi(std::string str)
+{
+  int num = 0;
+  int sign = 1;
+  int i = 0;
+
+  if (str[i] == '-')
+  {
+    sign = -1;
+    i++;
+  }
+  while (str[i] != '\0')
+  {
+    num = num * 10 + str[i] - '0';
+    i++;
+  }
+  return (sign * num);
+}

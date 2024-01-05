@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
 /*   Updated: 2024/01/03 19:20:42 by rabril-h         ###   ########.fr       */
@@ -26,8 +26,13 @@ class Server {
     int                     getOpenConnections() const;
 
     // ? This function is needed from Pong command
-    Client *                getClientByFd(int fd);
+    Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
     std::string             getServerCreationTime() const;
+
+
+    int getOpenConnections() const;
+    std::string getPassword() const;
+    std::map<int, Client *> getClients() const;
 
 
     void run();
@@ -92,3 +97,4 @@ class Server {
 #endif
 
  void                      handler(int signal);
+ int                       ft_stoi(std::string str);
