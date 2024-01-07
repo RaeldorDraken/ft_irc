@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 18:43:30 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:33:57 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,47 @@
 
 User::User(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  (void)vec;
 
-  // ? Get to know which client is executing the command
-  //std::map<int, Client *> _myClients = server->getClients();
-  Client *target = server->getClientByFd(clientFd);
+  Client *client = server->getClientByFd(clientFd);
 
-  std::cout << "User command created with passed clientFd of " << clientFd << std::endl;
-
-  //! Remove. this is a test
-
-  if (target != nullptr) // ?  Safe to check if we had a match
+  if (client == nullptr)
   {
-      target->sendMessage(Messages::getUserWelcome("nickdemierda", "networkname", "nickedemierda", "hostdemierda"));
-      target->sendMessage(Messages::getCreatedAt("nickdemierda", server->getServerCreationTime()));
-      target->sendMessage(Messages::getMyInfo("nickdemierda", "servername"));
+    std::cout << "Client is null" << std::endl;
+    return ;
   }
-  
- 
-    
+
+  if (client->getName() != "")
+  {
+    std::ostringstream oss;
+    oss << "name: " << client->getName() << "\nrealname: " << client->getRealName();
+    client->sendMessage("You are already registered with:\n" + oss.str() + "\n");
+    std::cout << clientFd << ": User already registered" << std::endl;
+    return ;
+  }
+
+  if (vec.size() < 5)
+  {
+    client->sendMessage("Not enough arguments\n");
+    std::cout << clientFd << ": Not enough params" << std::endl;
+    return ;
+  }
+  else
+  {
+    client->setName(vec[1]);
+    std::string realName = vec[4];
+    if (vec.size() > 5)
+    {
+      for (size_t i = 5; i < vec.size(); i++)
+        realName += " " + vec[i];
+      client->setRealName(realName);
+    }
+    if (realName[0] == ':')
+      realName = realName.substr(1, realName.size() - 1);
+    client->setRealName(realName);
+    client->sendMessage("You are now registered");
+    std::cout << clientFd << ": User registered" << std::endl;
+    return ;
+  }    
 }
 
 User::~User(void) {return ;}

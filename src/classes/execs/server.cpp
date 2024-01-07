@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 19:21:35 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:07:57 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
   const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
   
-  const std::string logincmds[3] = {"NAME", "REAL", "NICK"};
+  const std::string logincmds[4] = {"USER", "NICK", "PASS", "CAP"};
 
   size_t icomm = 0;
   
@@ -41,34 +41,12 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   //std::cout << "input es " << input << std::endl;
 
-  if (_clients[clientFd]->getRegistered() == false && input != "PASS")
-  {
-    //std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
-    this->getClientByFd(clientFd)->sendMessage("You are not registered yet");
-    return ;
-  }
-  else if (_clients[clientFd]->getRegistered() == false && input == "PASS")
-  {
-    std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
-    Pass pass = Pass(clientFd, vec, this);
-    return ;
-  }
-  else if (_clients[clientFd]->getRegistered() == true && input == "PASS")
-  {
-    std::cout << "Client [" << clientFd << "] is already registered" << std::endl;
-    return ;
-  }
-  else
-  {
-    //Handle Username and Nickname and all that
-    std::cout << "Client [" << clientFd << "] is registered" << std::endl;
-  }
-
   if (_clients[clientFd]->getName() == ""
-  || _clients[clientFd]->getNickName() == "" 
-  || _clients[clientFd]->getRealName() == "")
+  && _clients[clientFd]->getNickName() == "" 
+  && _clients[clientFd]->getRealName() == ""
+  && !_clients[clientFd]->getRegistered())
   {
-      while (icomm < size)
+    while (icomm < logincmds->size())
     {
       if (input == logincmds[icomm])
           break;
@@ -76,14 +54,18 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     }
     switch (icomm)
     {
-      case 0: { // NAME
-        Name name = Name(clientFd, vec, this);  
+      case 0: { // USER
+        User name = User(clientFd, vec, this);  
       }  break;
-      case 1: { // REAL
-        Real real = Real(clientFd, vec, this);
-      } break;
-      case 2: { // NICK
+      case 1: { // NICK
         Nick nick = Nick(clientFd, vec, this);
+      } break;
+      case 2: { // PASS
+        Pass pass = Pass(clientFd, vec, this);
+      } break;
+      case 3: { // CAP
+        std::cout << "handling CAP on client [" << clientFd << "] with params :" << std::endl;
+        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");
       } break;
       default: {
         std::cout << input << " is an unhandled command" << std::endl;
@@ -92,6 +74,8 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     std::cout << "Client [" << clientFd << "] has yet not been set up" << std::endl;
     return ;
   }
+
+  icomm = 0;
 
   while (icomm < size)
   {
