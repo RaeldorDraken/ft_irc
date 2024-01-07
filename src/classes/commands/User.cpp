@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 19:47:15 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:05:03 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   if (client == nullptr)
   {
     std::cout << "Client is null" << std::endl;
-    return ;
-  }
-
-  if (client->getName() != "")
-  {
-    std::ostringstream oss;
-    oss << "name: " << client->getName() << "\nrealname: " << client->getRealName();
-    client->sendMessage("You are already registered with:\n" + oss.str() + "\n");
-    std::cout << clientFd << ": User already registered" << std::endl;
     return ;
   }
 

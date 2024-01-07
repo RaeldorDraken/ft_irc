@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:33:12 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:27:49 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Server {
 
     std::string getPassword() const;
 
-
+    void                      removeClient(Client const &client);
 
     void run();
 
@@ -63,7 +63,6 @@ class Server {
     // * Private Member functions
 
     // ? comms classes/comms
-    void                      _removeClient(Client const &client);
     void                      _createClient(void);
     void                      _processClientRequest(int c);
     

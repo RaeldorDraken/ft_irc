@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:43:54 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:28:13 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void Server::_processClientRequest(int c)
     }
     if (bytesRead == 0)
     {
-        this->_removeClient(*_clients[this->_pollsfd[c].fd]);              
+        this->removeClient(*_clients[this->_pollsfd[c].fd]);              
         return;
     }
     std::string request(buffer, bytesRead); // ? Make a string out of the current request based on content and length of the request    
