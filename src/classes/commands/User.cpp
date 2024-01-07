@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 18:29:53 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:33:57 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
     std::string realName = vec[4];
     if (vec.size() > 5)
     {
-      for (int i = 5; i < vec.size(); i++)
+      for (size_t i = 5; i < vec.size(); i++)
         realName += " " + vec[i];
       client->setRealName(realName);
     }
