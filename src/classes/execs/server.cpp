@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 19:07:57 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:47:00 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
       } break;
       case 3: { // CAP
         std::cout << "handling CAP on client [" << clientFd << "] with params :" << std::endl;
-        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");
+        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");        
       } break;
       default: {
         std::cout << input << " is an unhandled command" << std::endl;

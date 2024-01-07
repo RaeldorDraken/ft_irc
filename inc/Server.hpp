@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:33:12 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:28:18 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ class Server {
     Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
     std::string             getServerCreationTime() const;
 
-    std::string getPassword() const;
+    std::string             getPassword() const;
+    void                    removeClient(Client const &client);
 
 
 
@@ -62,8 +63,7 @@ class Server {
     
     // * Private Member functions
 
-    // ? comms classes/comms
-    void                      _removeClient(Client const &client);
+    // ? comms classes/comms  
     void                      _createClient(void);
     void                      _processClientRequest(int c);
     
