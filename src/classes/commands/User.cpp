@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 18:29:53 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:35:37 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
     std::string realName = vec[4];
     if (vec.size() > 5)
     {
-      for (int i = 5; i < vec.size(); i++)
+      for (size_t i = 5; i < vec.size(); i++)
         realName += " " + vec[i];
       client->setRealName(realName);
     }
     if (realName[0] == ':')
       realName = realName.substr(1, realName.size() - 1);
     client->setRealName(realName);
-    client->sendMessage("You are now registered");
     std::cout << clientFd << ": User registered" << std::endl;
     return ;
   }    
