@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 20:28:52 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:02:14 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void handler(int signal) {
 } // ? handler function for exiting program via signal (keyboard) 
 
 
-
+// ? Constructor
 Server::Server(int port, const std::string password){
   
   std::cout << "El puerto es " << port << " y el password es " << password << std::endl;
@@ -85,7 +85,7 @@ Server::Server(int port, const std::string password){
 }
 
 
-
+//  ? Destructor
 Server::~Server(){
   std::cout << "\nServer destoyed" << std::endl;  
 
@@ -133,6 +133,8 @@ void Server::removeClient(Client const &client)
   _clients.erase(targetFd);  
 }
 
+
+// ? Entry point
 void Server::run()
 {
   int c; // ? Counter for _openConnections
@@ -170,6 +172,8 @@ void Server::run()
 
 }
 
+// ? Server Public Methods
+
 int Server::getOpenConnections() const
 {
   return (this->_openConnections);
@@ -186,5 +190,47 @@ Client *Server::getClientByFd(int fd)
 
 std::string Server::getServerCreationTime() const
 {
-  return this->_serverCreationTime;
+  return (this->_serverCreationTime);
+}
+std::string Server::getCurrentTime()
+{
+  time_t t = std::time(0);
+  struct tm *now = std::localtime(&t);
+  std::string time(asctime(now));
+  time.erase(--time.end());
+  return time;
+}
+
+std::vector<Channel *> Server::getServerChannels() const
+{
+  return (this->_channels);
+}
+
+int Server::searchChannel(std::string const &channelName)
+{
+  size_t count = 0;
+
+  while (count < this->_channels.size())
+  {
+    if (!channelName.compare(this->_channels[count]->getChannelName())) // ? if the comparision is 0 means we have a match
+      return (count);
+    count++;
+  }
+  return (-1); // ? We return -1 for a mismatch in searching for a channel in channels list
+}
+
+
+void Server::addClientToChannel(int clientFd, std::string const &channelName)
+{
+  Client *client = this->_clients[clientFd];
+
+  for (size_t i = 0; i < this->_channels.size(); ++i)
+  {
+    if (channelName == this->_channels[i]->getChannelName())
+    {
+        _channels[i]->addNewClient(*client);
+        return;
+    }
+  }
+  this->_channels.push_back(new Channel(channelName, *client, this));
 }

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 20:31:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:07:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   size_t found = vec[1].find(',');
 	if (found != std::string::npos)
 	{
-		std::cout << "Joining more than one channel" << std::endl;
+		//std::cout << "Joining more than one channel" << std::endl;
     
     std::vector<std::string> targets;
     std::stringstream ss(vec[1]);
@@ -35,21 +35,94 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
     while (std::getline(ss, token, ','))
         targets.push_back(token);    
 
-    for (size_t i = 0; i < targets.size(); i++)
-      std::cout << "Channel " << i << " : to join is " << "-> " << targets[i] << std::endl;
+    // for (size_t i = 0; i < targets.size(); i++)
+    //   std::cout << "Channel " << i << " : to join is " << "-> " << targets[i] << std::endl;
 
-    // int pwdNum = 0;
-		// for (unsigned long i = 0; i < targets.size(); i++)
-		// {	
-		// 	pwdNum += _joinChannel(clientFd, vec, targets[i], pwdNum);
-		// }
+    int pwdNum = 0;
+		for (unsigned long i = 0; i < targets.size(); i++)
+			pwdNum += this->_joinChannel(clientFd, vec, targets[i], pwdNum, server);
 	}
 	else
-		// _joinChannel(clientFd, vec, vec[1], 0);
-    std::cout << "Join a single channel" << std::endl;
+	{
+		std::string	channelToJoin = vec[1];
+		this->_joinChannel(clientFd, vec, channelToJoin, 0, server);
+    //std::cout << "Join a single channel with " << channelToJoin << std::endl;
+	}
+		
 
   
   return ;
 }
 
 Join::~Join(void) {return ;}
+
+std::vector<std::string> Join::_getPwds(std::vector<std::string> &vec)
+{
+	std::vector<std::string>	pwds;
+	if (vec.size() > 2)
+	{
+		std::stringstream ss(vec[2]);
+    std::string pwd;
+    while (std::getline(ss, pwd, ','))
+        pwds.push_back(pwd);			
+		return pwds;
+	}
+	return pwds;
+}
+
+bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec, std::string &target, int pwdNum, Server *server)
+{
+	// (void) clientFd;
+	(void)	vec;
+	// (void) target;
+	(void) pwdNum;
+
+	Client		*client = server->getClientByFd(clientFd);
+
+	if (target[0] != '&' && target[0] != '#')
+	{
+		client->sendMessage(Messages::printBadChannelMask(client->getNickName()));
+		return false;
+	}
+
+	int channelExists = server->searchChannel(target);
+
+	if (channelExists != -1) // ? If channel exists
+	{
+		std::cout << "Channel " << target << " exists" << std::endl;
+
+		// Channel *channel = server->getServerChannels()[channelExists];
+
+		// std::vector<std::string> myVec = vec;
+		// std::vector<std::string> pwds = this->_getPwds(myVec);
+
+		// TODO continue adding to existing channnels
+
+	}
+	// ? If channel does not exist
+
+	server->addClientToChannel(clientFd, target);
+	channelExists = server->searchChannel(target);
+
+	Channel *channel = server->getServerChannels()[channelExists];
+	if (channel->getChannelTopic() != "")
+	{	
+		client->sendMessage(Messages::getTopic(client->getNickName(), channel->getChannelName(), channel->getChannelTopic()));
+		client->sendMessage(Messages::getTopicWhoWhen(client->getNickName(), channel->getChannelName(), channel->getChannelTopic(), server->getCurrentTime()));
+	}
+	else
+		client->sendMessage(Messages::getNoTopic(client->getNickName(), channel->getChannelName()));
+
+	// TODO implement below and test joining existing channels
+
+	// std::string	joinmsg = client->getNick() + "!" + client->getHostName() + " JOIN " + channel->getName();
+	// channel->sendMsg(NULL, joinmsg);
+	// channel->_sendNames(*client);
+	// if (channel->getK())
+	// 	return 1;
+	// return 0;
+
+
+
+	return true;
+}

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:18:40 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 20:08:52 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:56:12 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ class Join : public ACommand {
     ~Join(void);
 
   private:
-    //_joinChannel(int const client_fd, std::vector<std::string> &vec, std::string &target, int pwdNum);
+    bool                        _joinChannel(int const clientFd, std::vector<std::string> const &vec, std::string &target, int pwdNum, Server *server);
+
+    std::vector<std::string>    _getPwds(std::vector<std::string> &vec);
 };
 
 #endif
