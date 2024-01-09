@@ -181,6 +181,23 @@ std::string Channel::getModeArguments()
   return args; 
 }
 
+void Channel::sendNames(Client const &client) const
+{
+  Client *my_client;
+
+  client.sendMessage(Messages::printNamesReply(client.getNickName(), this->_name, "", "RoabhiDrakenBot"));
+  std::set<int>::const_iterator it;
+  for (it = this->_members.begin(); it != this->_members.end(); it++)
+  {
+    my_client = _server->getClientByFd(*it);
+    std::string prefix = "";
+    if (this->clientIsOperator(my_client->getClientFd()))
+      prefix = "@";
+    client.sendMessage(Messages::printNamesReply(client.getNickName(), this->_name, prefix, my_client->getNickName()));
+  }
+  client.sendMessage(Messages::printEndOfNames(client.getNickName(), this->_name));
+}
+
 // ? Getters and Setters for modes
 
 bool Channel::getIMode()

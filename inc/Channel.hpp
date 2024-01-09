@@ -69,6 +69,8 @@ class Channel {
     void                setChannelTopic(std::string const &topic);
     const std::string   getChannelTopic();
 
+    void                sendNames(Client const &client) const;
+
 
   private:
 

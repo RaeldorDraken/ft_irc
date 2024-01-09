@@ -75,7 +75,8 @@ Server::Server(int port, const std::string password){
 
   // ? Set Server Creation datetime
   
-  std::time_t currentTime = std::time(nullptr);
+  //std::time_t currentTime = std::time(nullptr);
+  std::time_t currentTime = std::time(NULL);
   char timeString[100];
   std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
 
@@ -183,9 +184,11 @@ Client *Server::getClientByFd(int fd)
 {
   std::map<int, Client *>::iterator it;
   for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
-      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
+      return (it->first == fd) ? it->second : NULL; // ?  return found client based on fd passed to function  
+      //return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
   }
-  return nullptr;  // ? Return nullptr if not found
+  //return nullptr;  // ? Return nullptr if not found
+  return NULL;
 }
 
 std::string Server::getServerCreationTime() const

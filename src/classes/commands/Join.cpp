@@ -115,14 +115,12 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 
 	// TODO implement below and test joining existing channels
 
-	// std::string	joinmsg = client->getNick() + "!" + client->getHostName() + " JOIN " + channel->getName();
-	// channel->sendMsg(NULL, joinmsg);
-	// channel->_sendNames(*client);
-	// if (channel->getK())
-	// 	return 1;
-	// return 0;
+	std::string	joinmsg = client->getNickName() + "!" + client->getHostName() + " JOIN " + channel->getChannelName();
 
+	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error...need to find a way to implement nullptr in c++98
+	channel->sendNames(*client);
+	if (channel->getKMode())
+		return true;
+	return false;
 
-
-	return true;
 }

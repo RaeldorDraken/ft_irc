@@ -19,7 +19,8 @@ Pong::Pong(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   // ? Here our vec is a custom vector made of just the token send by PING command not the arguments passed via normal execution!!!
 
-  if (vec.size() == 1 && target != nullptr)
+  //if (vec.size() == 1 && target != nullptr)
+  if (vec.size() == 1 && target != NULL)
     target->sendMessage("PONG with token " + vec[0]);  
 }
 

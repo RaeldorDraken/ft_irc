@@ -17,7 +17,8 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   Client *client = server->getClientByFd(clientFd);
 
-  if (client == nullptr)
+  //if (client == nullptr)
+  if (client == NULL)
   {
     std::cout << "Client is null" << std::endl;
     return ;
