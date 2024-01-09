@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:34:27 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:39:20 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Client::Client(int fd) :
   _nickname (""),
   _buffer ("")
 {
-  std::cout << "New client with fd " << this->_clientFd << std::endl;
+  std::cout << "New client with fd " << this->getClientFd() << std::endl;
 }
 
 Client::~Client(void)

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/08 19:16:28 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:28:59 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ Channel::Channel(std::string const &name, Client const &client, Server *server)
   _members = std::set<int>();
   _invited = std::set<int>();
   _operators = std::set<int>();
-  _i = false;
-  _t = false;
-  _k = false;
-  _o = false;
-  _l = false;
+  _i = false; // ? inivite
+  _t = false; // ? topic protection
+  _k = false; // ? channel as key / password
+  _o = false; // ? operator
+  _l = false; // ? limit
   
   this->addNewClient(client); // ? Add the creator of the channel as first member of the channel
   

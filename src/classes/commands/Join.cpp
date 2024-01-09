@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/08 21:07:06 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:04:25 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ std::vector<std::string> Join::_getPwds(std::vector<std::string> &vec)
 	return pwds;
 }
 
+// TODO This seems to create a new client. Try to pass a reference to a pointer
+
 bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec, std::string &target, int pwdNum, Server *server)
 {
 	// (void) clientFd;
@@ -113,11 +115,9 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 	else
 		client->sendMessage(Messages::getNoTopic(client->getNickName(), channel->getChannelName()));
 
-	// TODO implement below and test joining existing channels
-
 	std::string	joinmsg = client->getNickName() + "!" + client->getHostName() + " JOIN " + channel->getChannelName();
 
-	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error...need to find a way to implement nullptr in c++98
+	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error in linux...need to find a way to implement nullptr in c++98
 	channel->sendNames(*client);
 	if (channel->getKMode())
 		return true;

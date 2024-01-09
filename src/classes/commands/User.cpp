@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 18:33:57 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:05:39 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   Client *client = server->getClientByFd(clientFd);
 
-  //if (client == nullptr)
-  if (client == NULL)
+  if (client == nullptr)
+  // if (client == NULL)
   {
     std::cout << "Client is null" << std::endl;
     return ;
