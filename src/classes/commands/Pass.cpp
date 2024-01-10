@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pass.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 09:50:32 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/10 21:44:51 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:03:55 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Pass::Pass(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 		client->setRegistered(true);
 		// TODO if password is correct, send welcome message
 		client->sendMessage("Welcome to irc chat!");		
-		client = nullptr;
+		client = NULL;
 	}
 	return ;
 }

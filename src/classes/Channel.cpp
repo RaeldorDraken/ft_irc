@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 20:28:59 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:03:39 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void Channel::removeOperator(Client const &client)
 }
 
 
-void Channel::sendChannelMessage(Client const &client, std::string const &message) const
+void Channel::sendChannelMessage(Client const *client, std::string const &message) const
 {
   Client *target;
 
@@ -75,7 +75,7 @@ void Channel::sendChannelMessage(Client const &client, std::string const &messag
   for (it = this->_members.begin(); it != it_end; it++)
   {
     target = this->_server->getClientByFd(*it);
-    if (target->getNickName() != client.getNickName())
+    if (target->getNickName() != client->getNickName())
       target->sendMessage(message);
   }
 }

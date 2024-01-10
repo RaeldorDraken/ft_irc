@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:27:20 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/08 19:15:50 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:02:55 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Channel {
     void                removeClient(Client const &client);
     void                removeOperator(Client const &client);
 
-    void                sendChannelMessage(Client const &client, std::string const &message) const;
+    void                sendChannelMessage(Client const *client, std::string const &message) const;
 
     bool                clientIsMember(std::string const &nickname);
     void                inviteClient(Client const &client);

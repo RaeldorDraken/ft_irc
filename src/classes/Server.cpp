@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:42:43 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:01:47 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ Server::Server(int port, const std::string password){
 
   // ? Set Server Creation datetime
   
-  std::time_t currentTime = std::time(nullptr);
+  std::time_t currentTime = std::time(NULL);
   //std::time_t currentTime = std::time(NULL);
   char timeString[100];
   std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
@@ -199,9 +199,9 @@ Client *Server::getClientByFd(int fd)
 
   for (it = _clients.begin(); it != it_end; it++) {
     if (it->first == fd)
-      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function     
+      return (it->first == fd) ? it->second : NULL; // ?  return found client based on fd passed to function     
   }
-  return nullptr;  // ? Return nullptr if not found
+  return NULL;  // ? Return NULL if not found
   // return NULL;
 }
 

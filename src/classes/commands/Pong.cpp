@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pong.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:44:10 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 19:05:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:04:06 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Pong::Pong(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   // ? Here our vec is a custom vector made of just the token send by PING command not the arguments passed via normal execution!!!
 
-  if (vec.size() == 1 && target != nullptr)
+  if (vec.size() == 1 && target != NULL)
   // if (vec.size() == 1 && target != NULL)
     target->sendMessage("PONG with token " + vec[0]);  
 }

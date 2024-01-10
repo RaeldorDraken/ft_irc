@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:44:38 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:02:23 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 
 	std::string	joinmsg = client->getNickName() + "!" + client->getHostName() + " JOIN " + channel->getChannelName();
 
-	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error in linux...need to find a way to implement nullptr in c++98
+	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error in linux...need to find a way to implement NULL in c++98
 	channel->sendNames(*client);
 	if (channel->getKMode())
 		return true;

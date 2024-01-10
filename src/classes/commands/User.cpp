@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 19:05:39 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:04:19 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   Client *client = server->getClientByFd(clientFd);
 
-  if (client == nullptr)
+  if (client == NULL)
   // if (client == NULL)
   {
     std::cout << "Client is null" << std::endl;
