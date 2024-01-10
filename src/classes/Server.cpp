@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 19:03:35 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:42:43 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,11 +181,25 @@ int Server::getOpenConnections() const
 }
 
 Client *Server::getClientByFd(int fd)
-{
-  std::map<int, Client *>::iterator it;
-  for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
-      // return (it->first == fd) ? it->second : NULL; // ?  return found client based on fd passed to function  
-      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
+{  
+  
+  // std::map<int, Client *>::iterator it; // ? Set iterator
+  // std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  // std::cout << "All clients from getclientFd are :" << std::endl << std::endl;
+
+  // for (it = _clients.begin(); it != it_end; it++)
+  // {
+  //   std::cout << "El cliente con fd " << it->first << " tiene un referencia en memoria: " << it->second << std::endl; 
+  // }
+  
+  
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++) {
+    if (it->first == fd)
+      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function     
   }
   return nullptr;  // ? Return nullptr if not found
   // return NULL;

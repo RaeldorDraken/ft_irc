@@ -6,15 +6,14 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 21:04:25 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:44:38 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../inc/commands/Join.hpp"
 
 Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
-{  
-  // std::cout << server->getOpenConnections() << std::endl;
+{   
 
   Client		*client = server->getClientByFd(clientFd); 
 
@@ -76,10 +75,10 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 {
 	// (void) clientFd;
 	(void)	vec;
-	// (void) target;
+	// // (void) target;
 	(void) pwdNum;
 
-	Client		*client = server->getClientByFd(clientFd);
+	Client		*client = this->_server->getClientByFd(clientFd);
 
 	if (target[0] != '&' && target[0] != '#')
 	{

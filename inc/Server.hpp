@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/08 21:01:35 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:42:16 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class Server {
     ~Server();
     int                     getOpenConnections() const;
 
-    // ? This function is needed from Pong command
     Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
     std::string             getServerCreationTime() const;
     std::string             getCurrentTime();
@@ -38,7 +37,7 @@ class Server {
 
     void                    addClientToChannel(int clientFd, std::string const &channelName);
 
-    int                     searchChannel(std::string const &channelName);
+    int                     searchChannel(std::string const &channelName);    
 
     void run();
 

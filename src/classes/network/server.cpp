@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 20:28:40 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:42:50 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,23 @@ void  Server::_createClient(void)
     std::cerr << "accept() error: " << std::strerror(errno) << std::endl;
   else // ? Exit accepting a new client
   {
-        struct pollfd p; // ? New struct pollfd to store info for new Client
-        this->_pollsfd.push_back(p); // ? Add the new client info to our existing _pollsfd vector
-        this->_pollsfd[this->_openConnections].fd = newfd; // ? with the current count on the polls vector (first time will be 1) asign the new fd to the current poll structure
-        this->_pollsfd[this->_openConnections].events = POLLIN; // ? Listen for incoming coneections on this client
-        this->_clients.insert(std::pair<int, Client *>(newfd, new Client(newfd))); // ? Insert the new Client into our map using the id / fd created y accept() and a pointer to the actual Client class
-        this->_openConnections++; // ? Increment our openConnection by 1
+    struct pollfd p; // ? New struct pollfd to store info for new Client
+    this->_pollsfd.push_back(p); // ? Add the new client info to our existing _pollsfd vector
+    this->_pollsfd[this->_openConnections].fd = newfd; // ? with the current count on the polls vector (first time will be 1) asign the new fd to the current poll structure
+    this->_pollsfd[this->_openConnections].events = POLLIN; // ? Listen for incoming coneections on this client
+    this->_clients.insert(std::pair<int, Client *>(newfd, new Client(newfd))); // ? Insert the new Client into our map using the id / fd created y accept() and a pointer to the actual Client class
+    this->_openConnections++; // ? Increment our openConnection by 1
   }
+
+  // std::map<int, Client *>::iterator it; // ? Set iterator
+  // std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  // for (it = _clients.begin(); it != it_end; it++)
+  // {
+  //   std::cout << "El cliente con fd " << it->first << " tiene un referencia en memoria: " << it->second << std::endl; 
+  // }
+
+
 }
 
 void Server::_processClientRequest(int c)
@@ -105,6 +115,7 @@ void Server::_processClientRequest(int c)
     if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")
     {
       std::cout << "Handling cleaning buffer " << std::endl;
+      
     }
     else
     {
