@@ -53,7 +53,7 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
   {
     my_channel->setChannelTopic("");
     std::string new_topic = "TOPIC " + my_channel->getChannelName() + " :" + my_channel->getChannelTopic();
-    my_channel->sendChannelMessage(NULL, new_topic);
+    my_channel->sendChannelMessage(0, new_topic);
     return ;
   }
 
@@ -63,8 +63,8 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
     for (unsigned long i = 3; i < vec.size(); i++)
       new_topic.append(" " + vec[i]);
     my_channel->setChannelTopic(new_topic);
-    my_channel->sendChannelMessage(NULL, Messages::getTopic(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic()));
-    my_channel->sendChannelMessage(NULL, Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic(), server->getCurrentTime()));
+    my_channel->sendChannelMessage(0, Messages::getTopic(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic()));
+    my_channel->sendChannelMessage(0, Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic(), server->getCurrentTime()));
     
   }
   else // ? Otherwise

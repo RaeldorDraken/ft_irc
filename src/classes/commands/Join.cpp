@@ -116,7 +116,7 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 
 	std::string	joinmsg = client->getNickName() + "!" + client->getHostName() + " JOIN " + channel->getChannelName();
 
-	channel->sendChannelMessage(NULL, joinmsg); // ! this thwrows a compiling error in linux...need to find a way to implement NULL in c++98
+	channel->sendChannelMessage(0, joinmsg); // ! this thwrows a compiling error in linux...need to find a way to implement NULL in c++98
 	channel->sendNames(*client);
 	if (channel->getKMode())
 		return true;

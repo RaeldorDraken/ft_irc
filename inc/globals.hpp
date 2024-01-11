@@ -33,7 +33,7 @@
 
 # include <cerrno> // ? Linux specific 
 
-// # include "NullPtrType.hpp"
+# include "NullPtrType.hpp"
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Channel.hpp"

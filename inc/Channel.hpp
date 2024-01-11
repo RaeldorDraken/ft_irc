@@ -33,7 +33,7 @@ class Channel {
     void                removeClient(Client const &client);
     void                removeOperator(Client const &client);
 
-    void                sendChannelMessage(Client const *client, std::string const &message) const;
+    void                sendChannelMessage(Client const &client, std::string const &message) const;
 
     bool                clientIsMember(std::string const &nickname);
     void                inviteClient(Client const &client);

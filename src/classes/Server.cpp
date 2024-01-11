@@ -89,7 +89,9 @@ Server::Server(int port, const std::string password){
 //  ? Destructor
 Server::~Server(){
   std::cout << "\nServer destoyed" << std::endl;  
-
+  
+  // ? destroy channels
+  this->_channels.clear();
   
   // TODO we need to close all fd for all clients here
 

@@ -38,6 +38,19 @@ Channel::Channel(std::string const &name, Client const &client, Server *server)
 Channel::~Channel(void)
 {
   // ? Do we need to empty all sets here ?
+
+  // ? Remove members from channel
+  std::set<int>::iterator it;
+  std::set<int>::iterator it_end = _members.end();
+
+  for (it = _members.begin(); it != it_end; it++)
+  {
+    _members.erase(it);
+  }
+    
+
+  std::cout << "Channel " << this->getChannelName() << " destroyed" << std::endl;
+
   return ;
 }
 
@@ -65,7 +78,7 @@ void Channel::removeOperator(Client const &client)
 }
 
 
-void Channel::sendChannelMessage(Client const *client, std::string const &message) const
+void Channel::sendChannelMessage(Client const &client, std::string const &message) const
 {
   Client *target;
 
@@ -75,7 +88,7 @@ void Channel::sendChannelMessage(Client const *client, std::string const &messag
   for (it = this->_members.begin(); it != it_end; it++)
   {
     target = this->_server->getClientByFd(*it);
-    if (target->getNickName() != client->getNickName())
+    if (target->getNickName() != client.getNickName())
       target->sendMessage(message);
   }
 }

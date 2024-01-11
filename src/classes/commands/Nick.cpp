@@ -17,18 +17,19 @@ Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   Client *client = this->_server->getClientByFd(this->_clientFd);
   if (client->getRegistered() == false)
   {
-  std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
-  return ;
+    std::cout << "Client [" << clientFd << "] is not registered yet" << std::endl;
+    return ;
   }
-  else if (vec.size() < 1)
+  else if (vec.size() < 2)
   {
-  std::cout << "Not enough params" << std::endl;
-  return ;
+    std::cout << "Not enough params" << std::endl;
+    return ;
   }
   else
   {
-  client->setNickName(vec[1]);
-  std::cout << "Client [" << clientFd << "] nick is now " << client->getNickName() << std::endl;
+    if (vec.size() > 1)    
+      client->setNickName(vec[1]);
+    client->sendMessage("Your nick now is " + client->getNickName());
   }
   return ;
 }

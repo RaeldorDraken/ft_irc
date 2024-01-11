@@ -33,4 +33,4 @@ private:
     void operator&() const;
 };
 
-#define nullptr NullPtrType()
+#define nullptrtype NullPtrType()

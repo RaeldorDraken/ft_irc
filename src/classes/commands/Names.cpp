@@ -14,12 +14,17 @@
 
 Names::Names(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  (void)server;
-  (void)vec;
+  // (void)server;
+  // (void)vec;
 
   // std::cout << "Names command created with passed clientFd of " << clientFd << std::endl;
 
   Client *client = server->getClientByFd(clientFd);
+
+  if (vec.size() < 2)
+  {
+    return ;
+  }
 
   std::vector<std::string> targets;
   std::stringstream ss(vec[1]);
