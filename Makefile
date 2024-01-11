@@ -6,7 +6,7 @@
 #    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2024/01/05 18:31:59 by rabril-h         ###   ########.fr        #
+#    Updated: 2024/01/11 21:33:26 by rabril-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJ_DIR = bin
 OBJ = $(addprefix $(OBJ_DIR)/, $(src:.cpp=.o))
 DEP = $(addsuffix .d, $(basename $(OBJ)))
 
-$(OBJ_DIR)/%.o: %.cpp Makefile
+$(OBJ_DIR)/%.o: %.cpp 
 	@mkdir -p $(@D)
 	${CC} $(CFLAGS) -MMD -c $< -o $@
 
@@ -41,7 +41,7 @@ $(OBJ_DIR)/%.o: %.cpp Makefile
 all:
 	@$(MAKE) $(NAME) #--no-print-directory
 
-$(NAME):: $(OBJ)
+$(NAME):: $(OBJ) Makefile
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:

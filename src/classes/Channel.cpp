@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 23:03:39 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:42:03 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Channel::Channel(std::string const &name, Client const &client, Server *server)
   _operators = std::set<int>();
   _i = false; // ? inivite
   _t = false; // ? topic protection
-  _k = false; // ? channel as key / password
+  _k = false; // ? channel has key / password
   _o = false; // ? operator
   _l = false; // ? limit
   

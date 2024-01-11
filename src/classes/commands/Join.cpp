@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 23:02:23 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:52:26 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
 Join::~Join(void) {return ;}
 
-std::vector<std::string> Join::_getPwds(std::vector<std::string> &vec)
+std::vector<std::string> Join::_getPwds(std::vector<std::string> const &vec)
 {
 	std::vector<std::string>	pwds;
 	if (vec.size() > 2)
@@ -74,9 +74,9 @@ std::vector<std::string> Join::_getPwds(std::vector<std::string> &vec)
 bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec, std::string &target, int pwdNum, Server *server)
 {
 	// (void) clientFd;
-	(void)	vec;
+	// (void)	vec;
 	// // (void) target;
-	(void) pwdNum;
+	// (void) pwdNum;
 
 	Client		*client = this->_server->getClientByFd(clientFd);
 
@@ -92,12 +92,24 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 	{
 		std::cout << "Channel " << target << " exists" << std::endl;
 
-		// Channel *channel = server->getServerChannels()[channelExists];
+		Channel *channel = server->getServerChannels()[channelExists];
 
-		// std::vector<std::string> myVec = vec;
-		// std::vector<std::string> pwds = this->_getPwds(myVec);
+		std::vector<std::string> pwds = this->_getPwds(vec);
 
-		// TODO continue adding to existing channnels
+		if (channel->getKMode() && ((int)pwds.size() <= pwdNum || pwds[pwdNum] != channel->getChannelPass())) // ? If channel is password protected
+		{
+			client->sendMessage(Messages::printBadChannelKey(client->getNickName(), channel->getChannelName()));
+		}
+
+		if (channel->getIMode() && !channel->clientIsInvited(*client)) // ? If clients is invite only and client is not in the list
+		{
+			client->sendMessage(Messages::getInviteOnlyChannel(client->getNickName(), channel->getChannelName()));
+		}
+
+		if (channel->getLMode() && channel->getChannelLimit() <= channel->getUserCount()) // ? If channel has limit and limit has been exceeded
+		{
+			client->sendMessage(Messages::printChannelIsFull(client->getNickName(),channel->getChannelName()));
+		}		
 
 	}
 	// ? If channel does not exist
