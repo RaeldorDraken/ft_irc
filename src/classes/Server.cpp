@@ -241,9 +241,16 @@ int Server::searchChannel(std::string const &channelName)
 
 void Server::addClientToChannel(int clientFd, std::string const &channelName)
 {
+  std::cout << "Channel name to join is " << channelName << std::endl;
+
+  std::cout << "Current channels are " << std::endl;
+
+  for (size_t i = 0; i < this->_channels.size(); i++)
+      std::cout << "[" << i << "] : Channel -> " << this->_channels[i] << " with name " << this->_channels[i]->getChannelName() << std::endl;
+  
   Client *client = this->_clients[clientFd];
 
-  for (size_t i = 0; i < this->_channels.size(); ++i)
+  for (size_t i = 0; i < this->_channels.size(); i++)
   {
     if (channelName == this->_channels[i]->getChannelName())
     {
@@ -251,5 +258,11 @@ void Server::addClientToChannel(int clientFd, std::string const &channelName)
         return;
     }
   }
-  this->_channels.push_back(new Channel(channelName, *client, this));
+
+
+
+
+  this->_channels.push_back(new Channel(channelName, *client, this)); // ! This line create indirect leaks on linux. Need to read the following
+  // ! https://stackoverflow.com/questions/46573427/what-is-the-difference-between-a-direct-and-indirect-leak
+  // ! https://stackoverflow.com/questions/22185896/what-is-the-cyclic-dependency-issue-with-shared-ptr
 }
