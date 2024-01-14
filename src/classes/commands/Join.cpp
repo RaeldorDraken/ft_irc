@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/11 21:52:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:03:37 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 		}		
 
 	}
-	// ? If channel does not exist
+	// ? If channel does exist
 
 	server->addClientToChannel(clientFd, target);
 	channelExists = server->searchChannel(target);

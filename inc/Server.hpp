@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:42:16 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:34:02 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class Server {
 
     std::vector<Channel *>  getServerChannels() const;
 
-    void                    addClientToChannel(int clientFd, std::string const &channelName);
+    void                    addClientToChannel(Client const &client, std::string const &channelName);
 
     int                     searchChannel(std::string const &channelName);    
 

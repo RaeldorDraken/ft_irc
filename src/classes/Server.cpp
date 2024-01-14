@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 23:01:47 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:34:23 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ int Server::searchChannel(std::string const &channelName)
 }
 
 
-void Server::addClientToChannel(int clientFd, std::string const &channelName)
+void Server::addClientToChannel(Client const &client, std::string const &channelName)
 {
   std::cout << "Channel name to join is " << channelName << std::endl;
 
@@ -248,21 +248,18 @@ void Server::addClientToChannel(int clientFd, std::string const &channelName)
   for (size_t i = 0; i < this->_channels.size(); i++)
       std::cout << "[" << i << "] : Channel -> " << this->_channels[i] << " with name " << this->_channels[i]->getChannelName() << std::endl;
   
-  Client *client = this->_clients[clientFd];
+  //Client *client = this->_clients[clientFd];
 
   for (size_t i = 0; i < this->_channels.size(); i++)
   {
     if (channelName == this->_channels[i]->getChannelName())
     {
-        _channels[i]->addNewClient(*client);
+        _channels[i]->addNewClient(client);
         return;
     }
-  }
+  } 
 
-
-
-
-  this->_channels.push_back(new Channel(channelName, *client, this)); // ! This line create indirect leaks on linux. Need to read the following
+  this->_channels.push_back(new Channel(channelName, client, this)); // ! This line create indirect leaks on linux. Need to read the following
   // ! https://stackoverflow.com/questions/46573427/what-is-the-difference-between-a-direct-and-indirect-leak
   // ! https://stackoverflow.com/questions/22185896/what-is-the-cyclic-dependency-issue-with-shared-ptr
 }

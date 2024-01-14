@@ -6,20 +6,20 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:44:19 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:10:09 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Client.hpp"
 
-Client::Client(int fd) : 
-  _clientFd (fd), 
-  _isRegistered (false),
-  _name (""),
-  _realname (""),
-  _nickname (""),
-  _buffer ("")
+Client::Client(int fd)  
 {
+  _clientFd = fd; 
+  _isRegistered = false;
+  _name = "";
+  _realname = "";
+  _nickname = "";
+  _buffer = "";
   std::cout << "New client with fd " << this->getClientFd() << std::endl;
 }
 
