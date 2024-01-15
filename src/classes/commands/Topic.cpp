@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:30:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 21:00:13 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:23:41 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
     return ;
   }
 
-  std::cout << "Llego aqui" << std::endl;
+  //std::cout << "Llego aqui" << std::endl;
 
   Channel *my_channel = server->getServerChannels()[channel];
 

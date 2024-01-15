@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/14 18:34:23 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:20:44 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,36 @@ Client *Server::getClientByFd(int fd)
   }
   return NULL;  // ? Return NULL if not found
   // return NULL;
+}
+
+Client *Server::getClientByNickName(std::string const nickname)
+{
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++)
+  {
+    //if ((*it).second->getNickName() == nickname)
+    if (it->second->getNickName() == nickname)    
+      return (it->second);
+  }
+
+  return NULL;
+}
+
+bool  Server::clientNickNameExists(std::string const nickname)
+{
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++) 
+  {
+    if (it->second->getNickName() == nickname)
+      return true;
+  }
+
+  return false;
+
 }
 
 std::string Server::getServerCreationTime() const

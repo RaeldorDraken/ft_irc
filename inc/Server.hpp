@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/14 18:34:02 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:17:52 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ class Server {
     int                     getOpenConnections() const;
 
     Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
+
+    Client *                getClientByNickName(std::string const nickname); // ? New function. This returns a client based on a string referring to their nickname
+
     std::string             getServerCreationTime() const;
     std::string             getCurrentTime();
 
@@ -38,6 +41,8 @@ class Server {
     void                    addClientToChannel(Client const &client, std::string const &channelName);
 
     int                     searchChannel(std::string const &channelName);    
+
+    bool                    clientNickNameExists(std::string const nickname);
 
     void run();
 
