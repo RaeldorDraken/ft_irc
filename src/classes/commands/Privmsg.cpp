@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:33:28 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/16 19:03:17 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:06:48 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-	// //PRIVMSG user msg
-	// if (vec.size() < 3)
-	// 	std::cout << "Not enough params" << std::endl;
-	// else
-	// {
-	// 	std::string msg = "";
-	// 	for (size_t i = 2; i < vec.size(); i++)
-	// 		msg += vec[i] + " ";
-	// 	std::cout << "Sending msg to " << vec[1] << " : " << msg << std::endl;
-	// 	// ! stoi is not in c++98 need to change the function to use another type of conversion
-	// 	sendMsg(clientFd, ft_stoi(vec[1]), msg);
-	// }
-
 	std::vector<std::string> my_vec = vec; // ? Make a copy of vector so it is no longer const and can be modified further in the code (_sendMsgToUser and _sendMsgToChannel)
 
 	if (my_vec.size() > 1)
@@ -63,13 +50,11 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 		Client *client = server->getClientByFd(clientFd);
 		client->sendMessage(Messages::printNoRecipient(client->getNickName(), "PRIVMSG"));
 	}
-
-
-
   return ;
 }
 
 Privmsg::~Privmsg(void) {return ;}
+
 
 void Privmsg::_sendMessageToChannel(int const clientFd, std::vector<std::string> &vec, std::string const &target, Server *server)
 {
@@ -89,6 +74,16 @@ void Privmsg::_sendMessageToChannel(int const clientFd, std::vector<std::string>
 		return ;
 	} // ? if not enough arguments
 
+	// TODO this may be solved in other commands maybe MODES. Do not allow message to a channel if client is not in that channel
+
+	if (!server->getServerChannels()[my_channelFd]->clientIsMember(client->getNickName()))
+	{
+		client->sendMessage(Messages::printNotOnChannel(client->getNickName(), server->getServerChannels()[my_channelFd]->getChannelName()));
+		return; 
+	}
+
+	// TODO end of TODO
+
 	std::string output = ":" + client->getNickName() + " PRIVMSG " + server->getServerChannels()[my_channelFd]->getChannelName(); // ? Format the beginning of the message as IRC standards
 	if (vec[2][0] != ':')
 		vec[2] = ":" + vec[2]; // ? if not present append :
@@ -98,7 +93,6 @@ void Privmsg::_sendMessageToChannel(int const clientFd, std::vector<std::string>
 
 	server->getServerChannels()[my_channelFd]->sendChannelMessage(*client, output); // ? send message to channel
 	
-
 }
 
 void Privmsg::_sendMsgToUser(int const clientFd, std::vector<std::string> &vec, std::string const &target, Server *server)
@@ -140,27 +134,5 @@ void Privmsg::_sendMsgToUser(int const clientFd, std::vector<std::string> &vec, 
 			output.append(" " + vec[i]); // ? Concatenate the text to message to send
 		targetClient->sendMessage(output); // ? Send it			
 	}
-
-
-
-
-
-
 }
 
-// void Privmsg::sendMsg(int const &sender, int const &receiver, std::string const &msg)
-// {
-//   // ! to_string is not in c++98, changed the function to use ostringstream
-//   std::ostringstream oss1;
-//   oss1 << sender;
-//   std::ostringstream oss2;
-//   oss2 << receiver;
-//   std::string msgtype = " PRIVMSG ";
-//   if (sender == receiver)
-// 	return ;
-//   else if (sender == 3)
-// 	msgtype = " NOTICE ";
-//   std::string toSend = ":" + oss1.str() + msgtype + oss2.str() + " :" + msg + "\r\n";
-//   std::cout << "Sending " << toSend << std::endl;
-//   send(receiver, toSend.c_str(), toSend.size(), 0);
-// }

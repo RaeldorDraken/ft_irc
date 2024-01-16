@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/11 21:42:03 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:53:32 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,21 @@ bool Channel::clientIsMember(std::string const &nickname)
   std::set<int>::iterator it;
   std::set<int>::iterator it_end = this->_members.end();
 
+  std::cout << " nick name to find is " << nickname << std::endl;
+
   for (it = this->_members.begin(); it != it_end; it++)
   {
     target = this->_server->getClientByFd(*it);
+
+    std::cout << "nickname for pos " << std::distance(_members.begin(), it) << " is " << target->getNickName() << std::endl;
+
+
     if (target->getNickName() == nickname)
+    {
+      std::cout << "Match found for " << target->getNickName() << std::endl;
       return true;
+    }
+      
   }
   return false;
 }
