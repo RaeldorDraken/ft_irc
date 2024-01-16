@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:33:28 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/15 20:58:53 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:03:17 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 	// 	sendMsg(clientFd, ft_stoi(vec[1]), msg);
 	// }
 
+	std::vector<std::string> my_vec = vec; // ? Make a copy of vector so it is no longer const and can be modified further in the code (_sendMsgToUser and _sendMsgToChannel)
 
-	if (vec.size() > 1)
+	if (my_vec.size() > 1)
 	{
-		size_t has_multiple = vec[1].find(',');		
+		size_t has_multiple = my_vec[1].find(',');		
 
 		if (has_multiple != std::string::npos)
 		{
 			std::vector<std::string> targets;
-			std::stringstream ss(vec[1]);
+			std::stringstream ss(my_vec[1]);
 			std::string token;
 			while (std::getline(ss, token, ','))
 					targets.push_back(token);  
@@ -43,17 +44,17 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 			for (unsigned long i = 0; i < targets.size(); i++)
 			{
 				if (targets[i][0] == '#' || targets[i][0] == '&' )
-					std::cout << "Send messages to channel " << std::endl; // ? send messages to channel
+					this->_sendMessageToChannel(clientFd, my_vec, targets[i], server); // ? send messages to channel
 				else
-					this->_sendMsgToUser(clientFd, vec, targets[i], server); // ? send messages to users
+					this->_sendMsgToUser(clientFd, my_vec, targets[i], server); // ? send messages to users
 			}
 		}
 		else
 		{
-			if (vec[1][0] == '#' || vec[1][0] == '&')
-				std::cout << "Send messages to channel " << std::endl; // ? send message to channel
+			if (my_vec[1][0] == '#' || my_vec[1][0] == '&')
+				this->_sendMessageToChannel(clientFd, my_vec, my_vec[1], server); // ? send message to channel
 			else
-				this->_sendMsgToUser(clientFd, vec, vec[1], server); // ? send messages to users
+				this->_sendMsgToUser(clientFd, my_vec, my_vec[1], server); // ? send messages to users
 
 		}
 	}
@@ -70,18 +71,45 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 
 Privmsg::~Privmsg(void) {return ;}
 
-void Privmsg::_sendMsgToUser(int const clientFd, std::vector<std::string> const &vec, std::string const &target, Server *server)
+void Privmsg::_sendMessageToChannel(int const clientFd, std::vector<std::string> &vec, std::string const &target, Server *server)
 {
 	Client *client = server->getClientByFd(clientFd);
-	//std::string	client_nickname = client->getNickName();
+
+	int my_channelFd = server->searchChannel(target); // ? Search for the channel to get send message to, to exist
+
+	if (my_channelFd == -1)
+	{
+		client->sendMessage(Messages::printNoSuchNick(client->getNickName(), target));
+		return ;
+	} // ? If channel does not exist
+
+	if (vec.size() < 3)
+	{
+		client->sendMessage(Messages::printNoTextToSend(client->getNickName()));
+		return ;
+	} // ? if not enough arguments
+
+	std::string output = ":" + client->getNickName() + " PRIVMSG " + server->getServerChannels()[my_channelFd]->getChannelName(); // ? Format the beginning of the message as IRC standards
+	if (vec[2][0] != ':')
+		vec[2] = ":" + vec[2]; // ? if not present append :
+	
+	for (unsigned long i = 2; i < vec.size(); i++)
+		output.append(" " + vec[i]); // ? Append the text to the message to send
+
+	server->getServerChannels()[my_channelFd]->sendChannelMessage(*client, output); // ? send message to channel
+	
+
+}
+
+void Privmsg::_sendMsgToUser(int const clientFd, std::vector<std::string> &vec, std::string const &target, Server *server)
+{
+	Client *client = server->getClientByFd(clientFd);
 
 	if (vec.size() < 2 || target[0] == ':')
 	{
 		client->sendMessage(Messages::printNoRecipient(client->getNickName(), "PRIVMSG"));
 		return ;
 	} // ? if not enough argmuments or second argument is just ":"
-
-	// TODO need to create a method in server to find a match over a client based on its nickname, which will need a connection to NICK
 
 	if (!server->clientNickNameExists(target) && target != "RoabhiDrakenBot")
 	{
@@ -105,17 +133,12 @@ void Privmsg::_sendMsgToUser(int const clientFd, std::vector<std::string> const 
 
 	if (targetClient != NULL) // ? If client exists
 	{
-		std::string msg;
-		//int targetFd = targetClient->getClientFd(); // ? Get their FD
-		// if (vec[2][0] != ':')
-		// {
-		// 	// ? Prepend ":" if not present
-		// 	msg = ':' + vec[2];
-		// }
-		std::string output = ":" + client->getNickName() + "!" + client->getHostName() + " PRIVMSG " + targetClient->getNickName();
+		if (vec[2][0] != ':')
+			vec[2] = ":" + vec[2]; // ? if not present append :
+		std::string output = ":" + client->getNickName() + "!" + client->getHostName() + " PRIVMSG " + targetClient->getNickName(); // ? format the beginning of the message as IRC standards
 		for (unsigned long i = 2; i < vec.size(); i++)
-			output.append(" " + vec[i]);
-		targetClient->sendMessage(output);			
+			output.append(" " + vec[i]); // ? Concatenate the text to message to send
+		targetClient->sendMessage(output); // ? Send it			
 	}
 
 
