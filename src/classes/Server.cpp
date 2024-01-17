@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/15 20:20:44 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:34:25 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,11 @@ void Server::run()
 int Server::getOpenConnections() const
 {
   return (this->_openConnections);
+}
+
+std::string Server::getPassword() const
+{
+  return this->_password;
 }
 
 Client *Server::getClientByFd(int fd)

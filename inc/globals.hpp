@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/09 19:07:29 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:31:56 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <cerrno> // ? Linux specific 
 
 # include "NullPtrType.hpp"
+# include "Utils.hpp"
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Channel.hpp"

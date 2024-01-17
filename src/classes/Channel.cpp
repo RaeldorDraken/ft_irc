@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/16 20:53:32 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:55:37 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ std::string Channel::getModeArguments()
   std::string args = "";
 
   if (_k && !_l) args.append(_channelPass);
-  if (_l && !_k) args.append(intToString(_limit));
-  if (_k && _l) args.append(_channelPass + " " + intToString(_limit));
+  if (_l && !_k) args.append(Utils::intToString(_limit));
+  if (_k && _l) args.append(_channelPass + " " + Utils::intToString(_limit));
   
   return args; 
 }

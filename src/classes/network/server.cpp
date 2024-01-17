@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:42:50 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:47:38 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void Server::_processClientRequest(int c)
     // ? concatenate any previously received but unprocessed data with the newly received data. This first tokenization is useful when recieving more than one line at the same time such as when a client joins the irc or a channel. Otherwise it will be printed all in the same line.
     request = _clients[this->_pollsfd[c].fd]->getBuffer() + request;   
 
-    std::vector<std::string> tokens = _tokenizeStr(request, "\r\n");
+    std::vector<std::string> tokens = Utils::tokenizeByStr(request, "\r\n");
+    
 
     // ! snippet for printing tokens - remove on production          
     //this->_printVector(tokens, "Content of tokenized request is ");           
@@ -96,7 +97,7 @@ void Server::_processClientRequest(int c)
     // ? Here we tokenize again for every line
     for (size_t j = 0; j < tokens.size(); ++j) 
     {
-      std::vector<std::string> myCommands = this->_buildCommand(tokens[j].c_str(), ' ');
+      std::vector<std::string> myCommands = Utils::tokenizeByChar(tokens[j].c_str(), ' ');
 
       // ! temporary vector to get parsed command
 
