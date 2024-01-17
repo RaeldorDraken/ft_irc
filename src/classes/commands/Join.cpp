@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/14 18:03:37 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:19:50 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 	{
 		//std::cout << "Joining more than one channel" << std::endl;
     
-    std::vector<std::string> targets;
-    std::stringstream ss(vec[1]);
-    std::string token;
-    while (std::getline(ss, token, ','))
-        targets.push_back(token);    
+    std::vector<std::string> targets = Utils::tokenizeByChar(vec[1],',');
+    // std::stringstream ss(vec[1]);
+    // std::string token;
+    // while (std::getline(ss, token, ','))
+    //     targets.push_back(token);    
 
     // for (size_t i = 0; i < targets.size(); i++)
     //   std::cout << "Channel " << i << " : to join is " << "-> " << targets[i] << std::endl;

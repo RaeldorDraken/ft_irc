@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:06:14 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 18:54:46 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:02:42 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ class Utils {
 
     static std::vector<std::string>      tokenizeByChar(std::string str, char c);
 
-    void                          printVector(std::vector<std::string> vec, std::string msg);
+    static void                          printVector(std::vector<std::string> vec, std::string msg);
 
     static int                           ft_stoi(std::string str);
     static std::string                   intToString(int number);
     static int                           getCharPosFromString(std::string &str, char c);
     static bool                          isCharInString(std::string &str, char c);
-    void                                 deleteCharFromString(std::string &str, char c);
+    static void                          deleteCharFromString(std::string &str, char c);
 
 
   private :

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 19:33:28 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/16 21:06:48 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:23:11 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ Privmsg::Privmsg(int const &clientFd, std::vector<std::string> const &vec, Serve
 
 		if (has_multiple != std::string::npos)
 		{
-			std::vector<std::string> targets;
-			std::stringstream ss(my_vec[1]);
-			std::string token;
-			while (std::getline(ss, token, ','))
-					targets.push_back(token);  
+			std::vector<std::string> targets = Utils::tokenizeByChar(my_vec[1],',');
+			// std::stringstream ss(my_vec[1]);
+			// std::string token;
+			// while (std::getline(ss, token, ','))
+			// 		targets.push_back(token);  
 
 			for (unsigned long i = 0; i < targets.size(); i++)
 			{

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:55:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/16 20:47:01 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:22:13 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ Kick::Kick(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   if (multiple != std::string::npos)
   {
-    std::vector<std::string> targets;
-    std::stringstream ss(vec[2]);
-    std::string token;
-    while (std::getline(ss, token, ','))
-        targets.push_back(token);
+    std::vector<std::string> targets = Utils::tokenizeByChar(vec[2], ',');
+    // std::stringstream ss(vec[2]);
+    // std::string token;
+    // while (std::getline(ss, token, ','))
+    //     targets.push_back(token);
 
     for (unsigned long i = 0; i < targets.size(); i++)
       this->_kickUser(clientFd, targets[i], my_channel, server);
