@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:30:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/15 20:23:41 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:05:27 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
     return ;
   }
 
-  if (vec.size() > 2 && my_channel->getTMode() && !my_channel->clientIsOperator(clientFd)) // ? If there is more than just TOPIC, meaninf args are enough long to have a string for topic BUT the channel is topic protected (+k) and client is NOT an operator of the channel
+  if (vec.size() > 2 && my_channel->getTMode() && !my_channel->clientIsOperator(clientFd)) // ? If there is more than just TOPIC, meaninf args are enough long to have a string for topic BUT the channel is topic protected (+t) and client is NOT an operator of the channel
   {
     client->sendMessage(Messages::printUserNotOperator(client->getNickName(), my_channel->getChannelName()));
+    return ;
   }
 
   if (vec.size() > 2 && vec[2] == ":") // ? If there are enough args to set a topic BUT the topic is just  ":"

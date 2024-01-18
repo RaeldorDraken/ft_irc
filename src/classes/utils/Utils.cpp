@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:05:31 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 18:43:56 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:39:15 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int Utils::getCharPosFromString(std::string &str, char c)
 	return i;
 }
 
-bool Utils::isCharInString(std::string &str, char c)
+bool Utils::isCharInString(std::string str, char c)
 {
   if (str == "")
 		return false;
