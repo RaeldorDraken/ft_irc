@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 19:19:50 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:28:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,19 @@ bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec,
 		if (channel->getKMode() && ((int)pwds.size() <= pwdNum || pwds[pwdNum] != channel->getChannelPass())) // ? If channel is password protected
 		{
 			client->sendMessage(Messages::printBadChannelKey(client->getNickName(), channel->getChannelName()));
+			return false;
 		}
 
 		if (channel->getIMode() && !channel->clientIsInvited(*client)) // ? If clients is invite only and client is not in the list
 		{
 			client->sendMessage(Messages::getInviteOnlyChannel(client->getNickName(), channel->getChannelName()));
+			return false;
 		}
 
 		if (channel->getLMode() && channel->getChannelLimit() <= channel->getUserCount()) // ? If channel has limit and limit has been exceeded
 		{
 			client->sendMessage(Messages::printChannelIsFull(client->getNickName(),channel->getChannelName()));
+			return false;
 		}		
 
 	}

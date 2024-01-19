@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:30:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/18 21:05:27 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:57:39 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
 
   if (vec.size() > 2 && my_channel->getTMode() && !my_channel->clientIsOperator(clientFd)) // ? If there is more than just TOPIC, meaninf args are enough long to have a string for topic BUT the channel is topic protected (+t) and client is NOT an operator of the channel
   {
+    //std::cout << "entro en setear +t sin ser operador" << std::endl;
     client->sendMessage(Messages::printUserNotOperator(client->getNickName(), my_channel->getChannelName()));
     return ;
   }

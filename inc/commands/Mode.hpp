@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:23:55 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/18 20:50:04 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:43:41 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class Mode : public ACommand {
   private:
 
     void                                    _addMode(std::map<std::string, std::string> &modes, std::vector<std::string> &vec, int const clientFd, Server *server);
+    void                                    _removeMode(std::map<std::string, std::string> &modes, std::vector<std::string> &vec, int const clientFd, Server *server);
     bool                                    _enoughArgsForMode(std::vector<std::string> &vec, Client *client, std::string &modes, char c);
     std::string                             _getKeyFromString(std::map<std::string, std::string> &modes, std::vector<std::string> &vec, char c, Client *client);
 
