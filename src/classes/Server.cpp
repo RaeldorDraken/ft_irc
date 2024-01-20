@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 18:34:25 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:09:55 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,23 @@ Server::~Server(){
 
 void Server::removeClient(Client const &client)
 {
-  // TODO remove Client from any channel!!
+  std::vector<Channel *> my_channels = this->getServerChannels();
 
-  std::cout << "Entro aqui" << std::endl;
+   for (size_t i = 0; i < my_channels.size(); i++)
+   {
+      // std::cout << "[" << i << "] : Canal es -> " << my_channels[i]->getChannelName() << std::endl;
+
+      if (my_channels[i]->clientIsMember(client.getNickName()))
+      {
+        // std::cout << "El canal " << my_channels[i]->getChannelName() << " tiene al cliente " << client.getNickName() << std::endl;
+        
+        if (my_channels[i]->clientIsOperator(client))
+          my_channels[i]->removeOperator(client);        
+        my_channels[i]->removeClient(client);        
+      }    
+   }
+
+  std::cout << "Entro en eliminar cliente" << std::endl;
 
   size_t counter = 0;
 
