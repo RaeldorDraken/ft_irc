@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:24:56 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/19 20:20:48 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:51:36 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void Mode::_addMode(std::map<std::string, std::string> &modes, std::vector<std::
 
   if (Utils::isCharInString(modes["+"], 'o') && this->_enoughArgsForMode(vec, client, modes["+"], 'o'))
   {
-    key = this->_getKeyFromString(modes, vec, 'k', client); // ? Get the nick from the arguments
+    key = this->_getKeyFromString(modes, vec, 'o', client); // ? Get the nick from the arguments
     if (Utils::isCharInString(modes["+"], 'o'))
     {
       Client *target_client = server->getClientByNickName(key); // ? Get the client for which we need to add operator mode
