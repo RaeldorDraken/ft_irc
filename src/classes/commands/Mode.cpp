@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:24:56 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/20 18:51:36 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:36:55 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,16 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   {
     return ;
   }
-
-  std::string channel_msg = ":" + client->getNickName() + "!" + client->getHostName() + " MODE " + my_channel->getChannelName() + " ";
-
-  if (modes["+"].size() > 1)
+  
+  if (my_channel->clientIsOperator(client->getClientFd()))
+  {
+    std::string channel_msg = ":" + client->getNickName() + "!" + client->getHostName() + " MODE " + my_channel->getChannelName() + " ";
+    if (modes["+"].size() > 1)
     channel_msg.append(modes["+"]);
-  if (modes["-"].size() > 1)
-    channel_msg.append(modes["-"]);
-  my_channel->sendChannelMessage(NULL, channel_msg);
+    if (modes["-"].size() > 1)
+      channel_msg.append(modes["-"]);
+    my_channel->sendChannelMessage(NULL, channel_msg);
+  } 
   
 
 }
@@ -100,6 +102,12 @@ void Mode::_addMode(std::map<std::string, std::string> &modes, std::vector<std::
   // (void) clientFd;
   Client  *client = server->getClientByFd(clientFd); // ? Get the client
   Channel *channel = server->getServerChannels()[server->searchChannel(vec[1])]; // ? Get the channel 
+
+  if (!channel->clientIsOperator(clientFd))
+  {
+    client->sendMessage(Messages::printUserNotOperator(client->getNickName(), channel->getChannelName())); // ? Send message
+    return ;
+  }
 
   std::string key = ""; // ? Var to hold the needed argument / key for modes for commands with parameters
 
