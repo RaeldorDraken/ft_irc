@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 20:22:47 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:31:56 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # include <cerrno> // ? Linux specific 
 
+# include "NullPtrType.hpp"
+# include "Utils.hpp"
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Channel.hpp"
@@ -52,11 +54,6 @@
 # include "commands/Name.hpp"
 # include "commands/Real.hpp"
 # include "commands/Nick.hpp"
-
-
-
-// TODO pong command is a bit different and weird to handle with ACommand. Maybe we should integrate it directly on the Server as method
-
 # include "commands/Pong.hpp"
 
 #endif

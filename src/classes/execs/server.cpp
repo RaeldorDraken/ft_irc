@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/07 19:07:57 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:25:08 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
   std::string input = vec[0];
   size_t size = sizeof(commands) / sizeof(commands[0]);
 
-  //std::cout << "input es " << input << std::endl;
+  std::cout << "input es " << input << std::endl;
 
-  if (_clients[clientFd]->getName() == ""
-  && _clients[clientFd]->getNickName() == "" 
-  && _clients[clientFd]->getRealName() == ""
-  && !_clients[clientFd]->getRegistered())
+  if (this->_clients[clientFd]->getName() == ""
+  && this->_clients[clientFd]->getNickName() == "" 
+  && this->_clients[clientFd]->getRealName() == ""
+  && this->_clients[clientFd]->getRegistered() == false)
   {
     while (icomm < logincmds->size())
     {
@@ -65,7 +65,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
       } break;
       case 3: { // CAP
         std::cout << "handling CAP on client [" << clientFd << "] with params :" << std::endl;
-        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");
+        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");        
       } break;
       default: {
         std::cout << input << " is an unhandled command" << std::endl;

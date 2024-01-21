@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:33:12 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:33:22 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "globals.hpp"
 
 class Client;
+class Channel;
 class ACommand;
 
 class Server {
@@ -25,13 +26,23 @@ class Server {
     ~Server();
     int                     getOpenConnections() const;
 
-    // ? This function is needed from Pong command
     Client *                getClientByFd(int fd); // ? New function. Now we only return the client based on passed fd
+
+    Client *                getClientByNickName(std::string const nickname); // ? New function. This returns a client based on a string referring to their nickname
+
     std::string             getServerCreationTime() const;
+    std::string             getCurrentTime();
 
-    std::string getPassword() const;
+    std::string             getPassword() const;
+    void                    removeClient(Client const &client);
 
+    std::vector<Channel *>  getServerChannels() const;
 
+    void                    addClientToChannel(Client const &client, std::string const &channelName);
+
+    int                     searchChannel(std::string const &channelName);    
+
+    bool                    clientNickNameExists(std::string const nickname);
 
     void run();
 
@@ -55,15 +66,14 @@ class Server {
     std::vector<pollfd>       _pollsfd; // ? Vector to store all connections via polls
     std::map<int, Client *>   _clients; // ? Map to store a int/fd AND Client * key/pair values
 
-    // std::vector<ACommand *>    _commands; // ? vector to include any commands including servers
+    std::vector<Channel *>    _channels; // ? vector to include any channels 
 
     std::string               _serverCreationTime;
 
     
     // * Private Member functions
 
-    // ? comms classes/comms
-    void                      _removeClient(Client const &client);
+    // ? comms classes/comms  
     void                      _createClient(void);
     void                      _processClientRequest(int c);
     
@@ -96,3 +106,4 @@ class Server {
 
  void                      handler(int signal);
  int                       ft_stoi(std::string str);
+ std::string               intToString(int number);

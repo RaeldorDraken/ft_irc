@@ -14,10 +14,33 @@
 
 Names::Names(int const &clientFd, std::vector<std::string> const &vec, Server *server) : ACommand(clientFd, vec, server)
 {
-  (void)server;
-  (void)vec;
+  // (void)server;
+  // (void)vec;
 
-  std::cout << "Names command created with passed clientFd of " << clientFd << std::endl;
+  // std::cout << "Names command created with passed clientFd of " << clientFd << std::endl;
+
+  Client *client = server->getClientByFd(clientFd);
+
+  if (vec.size() < 2)
+  {
+    return ;
+  }
+
+  std::vector<std::string> targets;
+  std::stringstream ss(vec[1]);
+  std::string target;
+  while (std::getline(ss, target, ','))
+      targets.push_back(target);	
+
+  for (unsigned long i = 0; i < targets.size(); i++)
+  {
+    int channel = server->searchChannel(targets[i]);
+    if (channel != -1)
+    {
+      Channel *my_channel = server->getServerChannels()[channel];
+      my_channel->sendNames(*client);
+    }
+  }
     
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:27:20 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/03 21:00:54 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/10 23:02:55 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,44 @@ class Channel {
     void                removeClient(Client const &client);
     void                removeOperator(Client const &client);
 
+    void                sendChannelMessage(Client const &client, std::string const &message) const;
+
+    bool                clientIsMember(std::string const &nickname);
+    void                inviteClient(Client const &client);
+    bool                clientIsInvited(Client const &client) const;
+    bool                clientIsOperator(Client const &client) const;
+
+    std::string         getModes();
+    std::string         getModeArguments();
 
     // ? Getters & Setters
 
-    const std::string   &getName() const;
-    const std::string   &getPass() const;
+    const std::string   &getChannelName() const;
+    const std::string   &getChannelPass() const;
+
+    bool                getIMode();
+    void                setIMode(bool m);
+    bool                getTMode();
+    void                setTMode(bool m);
+    bool                getKMode();
+    void                setKMode(bool m);
+    bool                getOMode();
+    void                setOMode(bool m);
+    bool                getLMode();
+    void                setLMode(bool m);
+
+
+    void                setChannelLimit(int limit);
+    void                setChannelPass(std::string &key);
+
+    int                 getUserCount();
+    int                 getChannelLimit();
+
+    void                setChannelTopic(std::string const &topic);
+    const std::string   getChannelTopic();
+
+    void                sendNames(Client const &client) const;
+
 
   private:
 
@@ -46,7 +79,7 @@ class Channel {
 
     std::string         _channelPass; // ? The pass for thhe channel
 
-    uint64_t             _limit; // ? member limits controlled by +l MODE
+    uint64_t            _limit; // ? member limits controlled by +l MODE
     std::string         _topic; // ? topic of channel controlled by +t MODE
 
     // ? We use set here becasue

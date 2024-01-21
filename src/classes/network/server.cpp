@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:21:08 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/28 09:43:54 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:47:38 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,23 @@ void  Server::_createClient(void)
     std::cerr << "accept() error: " << std::strerror(errno) << std::endl;
   else // ? Exit accepting a new client
   {
-        struct pollfd p; // ? New struct pollfd to store info for new Client
-        this->_pollsfd.push_back(p); // ? Add the new client info to our existing _pollsfd vector
-        this->_pollsfd[this->_openConnections].fd = newfd; // ? with the current count on the polls vector (first time will be 1) asign the new fd to the current poll structure
-        this->_pollsfd[this->_openConnections].events = POLLIN; // ? Listen for incoming coneections on this client
-        this->_clients.insert(std::pair<int, Client *>(newfd, new Client(newfd))); // ? Insert the new Client into our map using the id / fd created y accept() and a pointer to the actual Client class
-        this->_openConnections++; // ? Increment our openConnection by 1
+    struct pollfd p; // ? New struct pollfd to store info for new Client
+    this->_pollsfd.push_back(p); // ? Add the new client info to our existing _pollsfd vector
+    this->_pollsfd[this->_openConnections].fd = newfd; // ? with the current count on the polls vector (first time will be 1) asign the new fd to the current poll structure
+    this->_pollsfd[this->_openConnections].events = POLLIN; // ? Listen for incoming coneections on this client
+    this->_clients.insert(std::pair<int, Client *>(newfd, new Client(newfd))); // ? Insert the new Client into our map using the id / fd created y accept() and a pointer to the actual Client class
+    this->_openConnections++; // ? Increment our openConnection by 1
   }
+
+  // std::map<int, Client *>::iterator it; // ? Set iterator
+  // std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  // for (it = _clients.begin(); it != it_end; it++)
+  // {
+  //   std::cout << "El cliente con fd " << it->first << " tiene un referencia en memoria: " << it->second << std::endl; 
+  // }
+
+
 }
 
 void Server::_processClientRequest(int c)
@@ -65,7 +75,7 @@ void Server::_processClientRequest(int c)
     }
     if (bytesRead == 0)
     {
-        this->_removeClient(*_clients[this->_pollsfd[c].fd]);              
+        this->removeClient(*_clients[this->_pollsfd[c].fd]);              
         return;
     }
     std::string request(buffer, bytesRead); // ? Make a string out of the current request based on content and length of the request    
@@ -73,7 +83,8 @@ void Server::_processClientRequest(int c)
     // ? concatenate any previously received but unprocessed data with the newly received data. This first tokenization is useful when recieving more than one line at the same time such as when a client joins the irc or a channel. Otherwise it will be printed all in the same line.
     request = _clients[this->_pollsfd[c].fd]->getBuffer() + request;   
 
-    std::vector<std::string> tokens = _tokenizeStr(request, "\r\n");
+    std::vector<std::string> tokens = Utils::tokenizeByStr(request, "\r\n");
+    
 
     // ! snippet for printing tokens - remove on production          
     //this->_printVector(tokens, "Content of tokenized request is ");           
@@ -86,7 +97,7 @@ void Server::_processClientRequest(int c)
     // ? Here we tokenize again for every line
     for (size_t j = 0; j < tokens.size(); ++j) 
     {
-      std::vector<std::string> myCommands = this->_buildCommand(tokens[j].c_str(), ' ');
+      std::vector<std::string> myCommands = Utils::tokenizeByChar(tokens[j].c_str(), ' ');
 
       // ! temporary vector to get parsed command
 
@@ -105,6 +116,7 @@ void Server::_processClientRequest(int c)
     if (request.size() >= 2 && request.substr(request.size() - 2, request.size()) == "\r\n")
     {
       std::cout << "Handling cleaning buffer " << std::endl;
+      
     }
     else
     {

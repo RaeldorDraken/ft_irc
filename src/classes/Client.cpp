@@ -6,21 +6,21 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:34:27 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:10:09 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/Client.hpp"
 
-Client::Client(int fd) : 
-  _clientFd (fd), 
-  _isRegistered (false),
-  _name (""),
-  _realname (""),
-  _nickname (""),
-  _buffer ("")
+Client::Client(int fd)  
 {
-  std::cout << "New client with fd " << this->_clientFd << std::endl;
+  _clientFd = fd; 
+  _isRegistered = false;
+  _name = "";
+  _realname = "";
+  _nickname = "";
+  _buffer = "";
+  std::cout << "New client with fd " << this->getClientFd() << std::endl;
 }
 
 Client::~Client(void)
@@ -28,6 +28,22 @@ Client::~Client(void)
   std::cout << "Client " << this->_clientFd << " destroyed" << std::endl;
   //close(this->_clientFd);
 }
+
+Client::Client(const Client &inst)
+{
+  *this = inst;
+} // ? Copy constructor
+
+Client &Client::operator=(Client const &inst)
+{
+  this->_clientFd = inst._clientFd;
+  this->_isRegistered = inst._isRegistered;
+  this->_name = inst._name;
+  this->_realname = inst._realname;
+  this->_nickname = inst._nickname;
+  this->_buffer = inst._buffer;
+  return (*this);
+} // ? = operator assigment. We need to copy ALL private vars 
 
 void Client::setName(std::string name)
 {

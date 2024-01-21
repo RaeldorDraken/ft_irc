@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:08:34 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/02 19:21:21 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:19:26 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,16 @@ std::string Messages::getInviteOnlyChannel(std::string client, std::string chann
 std::string Messages::getUnknownModeFlag(std::string client)
 {
   return (std::string("501 ") + client + " :Unknown MODE flag");
+}
+
+// * MODE
+
+std::string Messages::getChannelModeOptions(std::string client, std::string channel, std::string modes, std::string args)
+{
+  return (std::string("324 ") + client + " " + channel + " " + modes + " " + args);
+}
+
+std::string Messages::printInvalidModeParam(std::string client, std::string target, std::string mode, std::string arg, std::string info)
+{
+  return (std::string("696 ") + client + " " + target + " " + mode + " " + arg + " :" + info);
 }

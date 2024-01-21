@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:04:19 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/02 20:07:00 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:18:42 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,12 @@ class Messages {
     // ? CODE 501
 
     static std::string      getUnknownModeFlag(std::string client); // ? user mode flag not recognized by server
+
+    // ? CODE 324
+
+    static std::string      getChannelModeOptions(std::string client, std::string channel, std::string modes, std::string args);
+    
+    static std::string      printInvalidModeParam(std::string client, std::string target, std::string mode, std::string arg, std::string info);
  
 
   private :

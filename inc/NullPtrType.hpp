@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Kick.hpp                                           :+:      :+:    :+:   */
+/*   NullPtrType.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 19:54:06 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/16 19:33:36 by rabril-h         ###   ########.fr       */
+/*   Created: 2024/01/09 19:01:55 by rabril-h          #+#    #+#             */
+/*   Updated: 2024/01/09 19:07:17 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KICK_HPP
-# define KICK_HPP
+#pragma once
 
-# include "../globals.hpp"
+// ? Class needed to compile in any other computer other than the fucking MacOS at 42 which DO NOT apply c98++ flags properly. 
 
-class Kick : public ACommand {
-  public:
-    Kick(int const &clientFd, std::vector<std::string> const &vec, Server *server);
-    ~Kick(void);
+class NullPtrType
+{
+public:
+    template<class T>
+    operator T*() const
+    {
+        return 0;
+    }
 
-  private:
+    template<class C, class T>
+    operator T C::*() const
+    {
+        return 0;
+    }
 
-    Client *           _kickUser(int const clientFd, std::string const &target, Channel *channel, Server *server);
+private:
+    void operator&() const;
 };
 
-#endif
+#define nullptrtype NullPtrType()

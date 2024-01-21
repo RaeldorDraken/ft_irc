@@ -22,7 +22,7 @@ ACommand::ACommand(int const &clientFd, std::vector<std::string> const &vec, Ser
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
     bool match = false;
     
-    for (ssize_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < 10; i++)
     {
       if (vec[0] == commands[i])
         match = true; 

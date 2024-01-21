@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/05 18:54:32 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:09:55 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void handler(int signal) {
 } // ? handler function for exiting program via signal (keyboard) 
 
 
-
+// ? Constructor
 Server::Server(int port, const std::string password){
   
   std::cout << "El puerto es " << port << " y el password es " << password << std::endl;
@@ -75,7 +75,8 @@ Server::Server(int port, const std::string password){
 
   // ? Set Server Creation datetime
   
-  std::time_t currentTime = std::time(nullptr);
+  std::time_t currentTime = std::time(NULL);
+  //std::time_t currentTime = std::time(NULL);
   char timeString[100];
   std::strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
 
@@ -85,10 +86,12 @@ Server::Server(int port, const std::string password){
 }
 
 
-
+//  ? Destructor
 Server::~Server(){
   std::cout << "\nServer destoyed" << std::endl;  
-
+  
+  // ? destroy channels
+  this->_channels.clear();
   
   // TODO we need to close all fd for all clients here
 
@@ -108,11 +111,25 @@ Server::~Server(){
 }
 
 
-void Server::_removeClient(Client const &client)
+void Server::removeClient(Client const &client)
 {
-  // TODO remove Client from any channel!!
+  std::vector<Channel *> my_channels = this->getServerChannels();
 
-  std::cout << "Entro aqui" << std::endl;
+   for (size_t i = 0; i < my_channels.size(); i++)
+   {
+      // std::cout << "[" << i << "] : Canal es -> " << my_channels[i]->getChannelName() << std::endl;
+
+      if (my_channels[i]->clientIsMember(client.getNickName()))
+      {
+        // std::cout << "El canal " << my_channels[i]->getChannelName() << " tiene al cliente " << client.getNickName() << std::endl;
+        
+        if (my_channels[i]->clientIsOperator(client))
+          my_channels[i]->removeOperator(client);        
+        my_channels[i]->removeClient(client);        
+      }    
+   }
+
+  std::cout << "Entro en eliminar cliente" << std::endl;
 
   size_t counter = 0;
 
@@ -133,6 +150,8 @@ void Server::_removeClient(Client const &client)
   _clients.erase(targetFd);  
 }
 
+
+// ? Entry point
 void Server::run()
 {
   int c; // ? Counter for _openConnections
@@ -170,21 +189,126 @@ void Server::run()
 
 }
 
+// ? Server Public Methods
+
 int Server::getOpenConnections() const
 {
   return (this->_openConnections);
 }
 
-Client *Server::getClientByFd(int fd)
+std::string Server::getPassword() const
 {
-  std::map<int, Client *>::iterator it;
-  for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
-      return (it->first == fd) ? it->second : nullptr; // ?  return found client based on fd passed to function   
+  return this->_password;
+}
+
+Client *Server::getClientByFd(int fd)
+{  
+  
+  // std::map<int, Client *>::iterator it; // ? Set iterator
+  // std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  // std::cout << "All clients from getclientFd are :" << std::endl << std::endl;
+
+  // for (it = _clients.begin(); it != it_end; it++)
+  // {
+  //   std::cout << "El cliente con fd " << it->first << " tiene un referencia en memoria: " << it->second << std::endl; 
+  // }
+  
+  
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++) {
+    if (it->first == fd)
+      return (it->first == fd) ? it->second : NULL; // ?  return found client based on fd passed to function     
   }
-  return nullptr;  // ? Return nullptr if not found
+  return NULL;  // ? Return NULL if not found
+  // return NULL;
+}
+
+Client *Server::getClientByNickName(std::string const nickname)
+{
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++)
+  {
+    //if ((*it).second->getNickName() == nickname)
+    if (it->second->getNickName() == nickname)    
+      return (it->second);
+  }
+
+  return NULL;
+}
+
+bool  Server::clientNickNameExists(std::string const nickname)
+{
+  std::map<int, Client *>::iterator it; // ? Set iterator
+  std::map<int, Client *>::iterator it_end = _clients.end(); // ? set end of iterator
+
+  for (it = _clients.begin(); it != it_end; it++) 
+  {
+    if (it->second->getNickName() == nickname)
+      return true;
+  }
+
+  return false;
+
 }
 
 std::string Server::getServerCreationTime() const
 {
-  return this->_serverCreationTime;
+  return (this->_serverCreationTime);
+}
+std::string Server::getCurrentTime()
+{
+  time_t t = std::time(0);
+  struct tm *now = std::localtime(&t);
+  std::string time(asctime(now));
+  time.erase(--time.end());
+  return time;
+}
+
+std::vector<Channel *> Server::getServerChannels() const
+{
+  return (this->_channels);
+}
+
+int Server::searchChannel(std::string const &channelName)
+{
+  size_t count = 0;
+
+  while (count < this->_channels.size())
+  {
+    if (!channelName.compare(this->_channels[count]->getChannelName())) // ? if the comparision is 0 means we have a match
+      return (count);
+    count++;
+  }
+  return (-1); // ? We return -1 for a mismatch in searching for a channel in channels list
+}
+
+
+void Server::addClientToChannel(Client const &client, std::string const &channelName)
+{
+  std::cout << "Channel name to join is " << channelName << std::endl;
+
+  std::cout << "Current channels are " << std::endl;
+
+  for (size_t i = 0; i < this->_channels.size(); i++)
+      std::cout << "[" << i << "] : Channel -> " << this->_channels[i] << " with name " << this->_channels[i]->getChannelName() << std::endl;
+  
+  //Client *client = this->_clients[clientFd];
+
+  for (size_t i = 0; i < this->_channels.size(); i++)
+  {
+    if (channelName == this->_channels[i]->getChannelName())
+    {
+        _channels[i]->addNewClient(client);
+        return;
+    }
+  } 
+
+  this->_channels.push_back(new Channel(channelName, client, this)); // ! This line create indirect leaks on linux. Need to read the following
+  // ! https://stackoverflow.com/questions/46573427/what-is-the-difference-between-a-direct-and-indirect-leak
+  // ! https://stackoverflow.com/questions/22185896/what-is-the-cyclic-dependency-issue-with-shared-ptr
 }
