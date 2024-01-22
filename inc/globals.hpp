@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 18:31:56 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:22:58 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@
 # include "commands/Real.hpp"
 # include "commands/Nick.hpp"
 # include "commands/Pong.hpp"
+# include "commands/Part.hpp"
 
 #endif

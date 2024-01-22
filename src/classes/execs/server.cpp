@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:25:08 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:34:09 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 {
-  const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
-                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
+  const std::string commands[11] = {"JOIN", "USER", "NICK", "PRIVMSG",
+                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING", "PART"};
   
   const std::string logincmds[4] = {"USER", "NICK", "PASS", "CAP"};
 
@@ -122,6 +122,9 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 9: { // PING
         Ping ping = Ping(clientFd, vec, this);
+    } break;
+    case 10: {
+        Part part = Part(clientFd, vec, this);
     } break;
     default: {
         std::cout << input << " is an unhandled command" << std::endl;
