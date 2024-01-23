@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:21:19 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/22 21:40:31 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:06:36 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,36 @@ Part::Part(int const &clientFd, std::vector<std::string> const &vec, Server *ser
  
 
   size_t multiple = vec[1].find(','); // ? get to know if we are parting from more than one channel
+  std::string reason; // ? Use a var to store the reason client leaves channel/s
+
+  if (vec.size() > 2) // ? If we have an additional argument for reason
+  {
+    for (size_t i = 2; i < vec.size(); ++i) {
+      // ? Concatenate each string to the result
+      reason += vec[i];
+      if (i < vec.size() - 1) {
+          reason += ' '; // ? Add space between words except for the last one
+      }
+    }
+  }    
+  else // ? Otherwise set default reason
+    reason = "no reason given..."; 
 
   if (multiple != std::string::npos)
   {
     std::vector<std::string> targets = Utils::tokenizeByChar(vec[1], ',');     
     for (unsigned long i = 0; i < targets.size(); i++)
-      this->_partFromChannel(clientFd, targets[i], server);      
+      this->_partFromChannel(clientFd, targets[i], reason, server);      
   }
   else 
-    this->_partFromChannel(clientFd, vec[1], server);
+    this->_partFromChannel(clientFd, vec[1], reason, server);
 
   return ;
 }
 
 Part::~Part(void) {return ;}
 
-void  Part::_partFromChannel(int const clientFd, std::string const &channel_name, Server *server)
+void  Part::_partFromChannel(int const clientFd, std::string const &channel_name, std::string reason, Server *server)
 {
   Client		*client = server->getClientByFd(clientFd);
 
@@ -65,7 +79,7 @@ void  Part::_partFromChannel(int const clientFd, std::string const &channel_name
   // ? We are good to part
 
   std::string output = ":" + client->getNickName() + "!" + client->getHostName() +\
-	" PART " + channel->getChannelName(); // ? Format message  
+	" PART " + channel->getChannelName() + " :" + reason; // ? Format message  
 
   channel->sendChannelMessage(NULL, output); // ? Send message to channel
 
