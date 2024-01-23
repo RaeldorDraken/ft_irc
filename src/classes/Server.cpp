@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:50 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/20 18:09:55 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 22:39:38 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ Server::Server(int port, const std::string password){
   // TODO init member vars
   this->_openConnections = 1; 
   this->_port = port;
+  this->_host = "127.0.0.1"; // ? This is the host for the server. We can change it to whatever we want
   this->_password = password;
 
   this->_pollsfd = std::vector<pollfd>(1); // ?  To be filled by struct pollfd as we add more connections to the pollfd struct
@@ -199,6 +200,11 @@ int Server::getOpenConnections() const
 std::string Server::getPassword() const
 {
   return this->_password;
+}
+
+std::string Server::getHost() const
+{
+  return this->_host;
 }
 
 Client *Server::getClientByFd(int fd)
