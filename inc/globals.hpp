@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 18:31:56 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:05:24 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@
 # include "commands/Real.hpp"
 # include "commands/Nick.hpp"
 # include "commands/Pong.hpp"
+# include "commands/Cap.hpp"
 
 #endif

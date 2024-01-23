@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 21:25:08 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:08:43 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 {
-  const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
-                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
-  
-  const std::string logincmds[4] = {"USER", "NICK", "PASS", "CAP"};
+  const std::string commands[14] = {"JOIN", "USER", "NICK", "PRIVMSG",
+                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING",
+                        "USER", "NICK", "PASS", "CAP"};
 
   size_t icomm = 0;
   
@@ -28,52 +27,18 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 
   // ? remove empty
   for (std::vector<std::string>::iterator it = vec.begin(); it != vec.end(); )
-    {
-        std::string value = *it;
-        if (value.empty())
-                it = vec.erase(it);
-        else
-            it++;
-    }
+  {
+    std::string value = *it;
+    if (value.empty())
+            it = vec.erase(it);
+    else
+        it++;
+  }
     
   std::string input = vec[0];
   size_t size = sizeof(commands) / sizeof(commands[0]);
 
   std::cout << "input es " << input << std::endl;
-
-  if (this->_clients[clientFd]->getName() == ""
-  && this->_clients[clientFd]->getNickName() == "" 
-  && this->_clients[clientFd]->getRealName() == ""
-  && this->_clients[clientFd]->getRegistered() == false)
-  {
-    while (icomm < logincmds->size())
-    {
-      if (input == logincmds[icomm])
-          break;
-      icomm++;
-    }
-    switch (icomm)
-    {
-      case 0: { // USER
-        User name = User(clientFd, vec, this);  
-      }  break;
-      case 1: { // NICK
-        Nick nick = Nick(clientFd, vec, this);
-      } break;
-      case 2: { // PASS
-        Pass pass = Pass(clientFd, vec, this);
-      } break;
-      case 3: { // CAP
-        std::cout << "handling CAP on client [" << clientFd << "] with params :" << std::endl;
-        _clients[clientFd]->sendMessage("CAP * ACK :cap1 cap2 - END");        
-      } break;
-      default: {
-        std::cout << input << " is an unhandled command" << std::endl;
-      } break;
-    }
-    std::cout << "Client [" << clientFd << "] has yet not been set up" << std::endl;
-    return ;
-  }
 
   icomm = 0;
 
@@ -122,6 +87,18 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 9: { // PING
         Ping ping = Ping(clientFd, vec, this);
+    } break;
+    case 10: { // USER
+        User name = User(clientFd, vec, this);  
+    }  break;
+    case 11: { // NICK
+        Nick nick = Nick(clientFd, vec, this);
+    } break;
+    case 12: { // PASS
+        Pass pass = Pass(clientFd, vec, this);
+    } break;
+    case 13: { // CAP
+        Cap cap = Cap(clientFd, vec, this); 
     } break;
     default: {
         std::cout << input << " is an unhandled command" << std::endl;

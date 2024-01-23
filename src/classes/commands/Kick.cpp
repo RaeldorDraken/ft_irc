@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Kick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:55:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 19:22:13 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:18:52 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Client *Kick::_kickUser(int const clientFd, std::string const &target, Channel *
   std::string output = ":" + client->getNickName() + "!" + client->getHostName() +\
 	" KICK " + channel->getChannelName() + " " + toKick->getNickName() + " Kicked from channel";
 
-  channel->sendChannelMessage(NULL, output);
+  channel->sendChannelMessage(0, output); //en casa no me funciona el NULL aqui
 
   // std::cout << "Members on channel " << channel->getChannelName() << " are: " << std::endl;
 

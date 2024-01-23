@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
+#    By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2024/01/17 18:56:52 by rabril-h         ###   ########.fr        #
+#    Updated: 2024/01/23 10:10:26 by eros-gir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -Werror -Wextra -Wall -std=c++98 -g -fsanitize=address
 
 FILES = main classes/Server classes/network/server classes/execs/server \
 classes/Client classes/Channel classes/ACommand classes/commands/Join \
-classes/commands/Privmsg classes/commands/Pass classes/commands/Nick \
+classes/commands/Privmsg classes/commands/Pass classes/commands/Nick classes/commands/Cap\
 classes/commands/Real classes/commands/Name classes/commands/Ping classes/commands/Pong \
 classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names \
 classes/commands/Topic classes/commands/User classes/Messages classes/utils/Utils
