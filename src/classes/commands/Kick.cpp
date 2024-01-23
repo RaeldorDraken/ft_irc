@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:55:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 19:22:13 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:49:28 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Client *Kick::_kickUser(int const clientFd, std::string const &target, Channel *
   std::string output = ":" + client->getNickName() + "!" + client->getHostName() +\
 	" KICK " + channel->getChannelName() + " " + toKick->getNickName() + " Kicked from channel";
 
-  channel->sendChannelMessage(NULL, output);
+  channel->sendChannelMessage(0, output);
 
   // std::cout << "Members on channel " << channel->getChannelName() << " are: " << std::endl;
 
