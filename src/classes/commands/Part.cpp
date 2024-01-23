@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:21:19 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 19:06:36 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:18:29 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void  Part::_partFromChannel(int const clientFd, std::string const &channel_name
   std::string output = ":" + client->getNickName() + "!" + client->getHostName() +\
 	" PART " + channel->getChannelName() + " :" + reason; // ? Format message  
 
-  channel->sendChannelMessage(NULL, output); // ? Send message to channel
+  channel->sendChannelMessage(0, output); // ? Send message to channel
 
   if (channel->clientIsOperator(*client))
     channel->removeOperator(*client); // ? If client i operator remove them from the _operators vector
