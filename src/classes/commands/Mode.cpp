@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:24:56 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 19:49:48 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:15:36 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
     channel_msg.append(modes["+"]);
     if (modes["-"].size() > 1)
       channel_msg.append(modes["-"]);
-    my_channel->sendChannelMessage(0, channel_msg);
+    my_channel->sendChannelMessage(0, channel_msg); //en casa no me funciona el NULL aqui
   } 
   
 
