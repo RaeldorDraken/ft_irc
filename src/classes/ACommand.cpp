@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:22 by rabril-h          #+#    #+#             */
-/*   Updated: 2023/12/30 18:58:22 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:27:23 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ ACommand::ACommand(int const &clientFd, std::vector<std::string> const &vec, Ser
   _type (vec[0]),
   _server (server)
   {
-    const std::string commands[10] = {"JOIN", "USER", "NICK", "PRIVMSG",
-                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING"};
+    const std::string commands[11] = {"JOIN", "USER", "NICK", "PRIVMSG",
+                        "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING", "PART"};
     bool match = false;
     
-    for (size_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < 11; i++)
     {
       if (vec[0] == commands[i])
         match = true; 

@@ -86,6 +86,7 @@ Client *Kick::_kickUser(int const clientFd, std::string const &target, Channel *
   std::string output = ":" + client->getNickName() + "!" + client->getHostName() +\
 	" KICK " + channel->getChannelName() + " " + toKick->getNickName() + " Kicked from channel";
 
+
   channel->sendChannelMessage(0, output); //en casa no me funciona el NULL aqui
 
   // std::cout << "Members on channel " << channel->getChannelName() << " are: " << std::endl;

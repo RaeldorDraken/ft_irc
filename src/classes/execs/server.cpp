@@ -14,9 +14,12 @@
 
 void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 {
-  const std::string commands[14] = {"JOIN", "USER", "NICK", "PRIVMSG",
+  const std::string logincmds[4] = {"USER", "NICK", "PASS", "CAP"};
+
+  const std::string commands[15] = {"JOIN", "USER", "NICK", "PRIVMSG",
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING",
-                        "USER", "NICK", "PASS", "CAP"};
+                        "USER", "NICK", "PASS", "CAP", "PART"};
+
 
   size_t icomm = 0;
   
@@ -99,6 +102,8 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 13: { // CAP
         Cap cap = Cap(clientFd, vec, this); 
+    case 14: { // PART
+        Part part = Part(clientFd, vec, this);
     } break;
     default: {
         std::cout << input << " is an unhandled command" << std::endl;

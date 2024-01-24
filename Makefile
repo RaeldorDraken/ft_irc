@@ -22,7 +22,7 @@ classes/Client classes/Channel classes/ACommand classes/commands/Join \
 classes/commands/Privmsg classes/commands/Pass classes/commands/Nick classes/commands/Cap\
 classes/commands/Real classes/commands/Name classes/commands/Ping classes/commands/Pong \
 classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names \
-classes/commands/Topic classes/commands/User classes/Messages classes/utils/Utils
+classes/commands/Topic classes/commands/Part classes/commands/User classes/Messages classes/utils/Utils
 
 
 src = $(addsuffix .cpp, $(FILES))

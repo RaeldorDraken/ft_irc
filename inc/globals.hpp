@@ -55,6 +55,7 @@
 # include "commands/Real.hpp"
 # include "commands/Nick.hpp"
 # include "commands/Pong.hpp"
+# include "commands/Part.hpp"
 # include "commands/Cap.hpp"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 15:08:16 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/19 20:28:21 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:09:51 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,8 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   size_t found = vec[1].find(',');
 	if (found != std::string::npos)
 	{
-		//std::cout << "Joining more than one channel" << std::endl;
     
-    std::vector<std::string> targets = Utils::tokenizeByChar(vec[1],',');
-    // std::stringstream ss(vec[1]);
-    // std::string token;
-    // while (std::getline(ss, token, ','))
-    //     targets.push_back(token);    
-
-    // for (size_t i = 0; i < targets.size(); i++)
-    //   std::cout << "Channel " << i << " : to join is " << "-> " << targets[i] << std::endl;
+    std::vector<std::string> targets = Utils::tokenizeByChar(vec[1],',');  
 
     int pwdNum = 0;
 		for (unsigned long i = 0; i < targets.size(); i++)
@@ -45,11 +37,8 @@ Join::Join(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 	{
 		std::string	channelToJoin = vec[1];
 		this->_joinChannel(clientFd, vec, channelToJoin, 0, server);
-    //std::cout << "Join a single channel with " << channelToJoin << std::endl;
-	}
-		
 
-  
+	}  
   return ;
 }
 
@@ -69,15 +58,10 @@ std::vector<std::string> Join::_getPwds(std::vector<std::string> const &vec)
 	return pwds;
 }
 
-// TODO This seems to create a new client. Try to pass a reference to a pointer
+
 
 bool Join::_joinChannel(int const clientFd, std::vector<std::string> const &vec, std::string &target, int pwdNum, Server *server)
 {
-	// (void) clientFd;
-	// (void)	vec;
-	// // (void) target;
-	// (void) pwdNum;
-
 	Client		*client = this->_server->getClientByFd(clientFd);
 
 	if (target[0] != '&' && target[0] != '#')
