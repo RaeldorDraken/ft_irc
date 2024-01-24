@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:49:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/23 22:40:11 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:47:01 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ Cap::Cap(int const &clientFd, std::vector<std::string> const &vec, Server *serve
   switch(icomm)
   {
 	case 0: { // LS
-	  client->sendMessage("CAP * LS :multi-prefix");  
+	  client->sendMessage(":127.0.0.1 CAP * LS :unrealircd.org/link-security=2 unrealircd.org/plaintext-policy=user=allow,oper=deny,server=deny unrealircd.org/history-storage=memory extended-join chghost cap-notify userhost-in-names multi-prefix away-notify sasl=EXTERNAL,PLAIN tls account-notify message-tags batch server-time account-tag echo-message labeled-response draft/chathistory\r\n");  
 	  break;
 	}
 	case 1: { // REQ
-	  client->sendMessage("CAP * ACK :multi-prefix");
+	  client->sendMessage(":127.0.0.1 CAP * ACK extended-join chghost cap-notify userhost-in-names multi-prefix away-notify tls account-notify server-time account-tag echo-message \r\n");
 	  break;
 	}
 	case 2: { // END
-	  client->sendMessage("CAP * END");
+	  //client->sendMessage("CAP * END"); //creo que no hace flata
 	  client->sendMessage(Messages::getUserWelcome(client->getName(), server->getHost(), client->getNickName(), client->getHostName()));
 	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHost()));
 	  client->sendMessage(Messages::getCreatedAt(client->getNickName(), server->getServerCreationTime()));
