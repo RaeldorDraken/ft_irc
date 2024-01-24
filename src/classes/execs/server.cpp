@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 10:08:43 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:18:27 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 13: { // CAP
         Cap cap = Cap(clientFd, vec, this); 
+    } break ;
     case 14: { // PART
         Part part = Part(clientFd, vec, this);
     } break;
