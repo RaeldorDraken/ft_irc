@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 19:17:53 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:03:13 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,5 +271,15 @@ bool Channel::getLMode()
 void Channel::setLMode(bool m)
 {
   this->_l = m;
+}
+
+std::set<int> Channel::getChannelMembers()
+{
+  return (this->_members);
+}
+
+std::set<int> Channel::getChannelOperators()
+{
+  return (this->_operators);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:08:34 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 20:19:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:45:02 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,11 @@ std::string Messages::getUnknownModeFlag(std::string client)
 }
 
 // * MODE
+
+std::string Messages::getEndOfBanList(std::string channel)
+{
+  return(std::string("368 ") + channel + " End of Channel Ban List");
+}
 
 std::string Messages::getChannelModeOptions(std::string client, std::string channel, std::string modes, std::string args)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:24:56 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 10:15:36 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:11:57 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
     else // ? If not
       client->sendMessage(Messages::printNoSuchChannel(client->getNickName(),""));
     return ;
-  }
+  }  
 
   int my_channelFd = server->searchChannel(my_vec[1]); // ? Search for the channel to get send message to, to exist
 
@@ -43,6 +43,13 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   // ? If channel exists
 
   Channel *my_channel = server->getServerChannels()[my_channelFd]; // ? Get an instance for the channel
+
+  if (my_vec.size() == 3 && my_vec[2][0] == 'b') // ? If we recieve a MODE b
+  {
+    client->sendMessage(Messages::getEndOfBanList(my_channel->getChannelName())); // ? Send end of banned list 
+    return ;
+  }
+  
 
   if (my_vec.size() == 2 || (my_vec[2][0] != '+' && my_vec[2][0] != '-')) // ? If we are trying to set modes and client is not using + or - reply with available options and instructions
   {
@@ -59,10 +66,10 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   // TODO temporary code, print result from formatMode
 
-  std::map<std::string, std::string>::iterator it;
-  for (it = modes.begin(); it != modes.end(); ++it) {
-      std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-  }
+  // std::map<std::string, std::string>::iterator it;
+  // for (it = modes.begin(); it != modes.end(); ++it) {
+  //     std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+  // }
   
   if (modes["+"].size() > 1)
   {

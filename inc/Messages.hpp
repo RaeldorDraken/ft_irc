@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:04:19 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 20:18:42 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:44:35 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,10 @@ class Messages {
     static std::string      getUserAwayMessage(std::string client, std::string nickname, std::string message);
 
     // * MODE CODES
+
+     // ? CODE 368
+
+    static std::string      getEndOfBanList(std::string channel); // ? end of ban list when recieving MODES b
 
 
     // ? CODE 472

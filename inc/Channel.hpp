@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:27:20 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 23:02:55 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:02:55 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,25 @@ class Channel {
 
     // ? Class public methods
 
-    void                addNewClient(Client const &client);
+    void                    addNewClient(Client const &client);
 
-    void                addNewOperator(Client const &client);
+    void                    addNewOperator(Client const &client);
 
-    void                removeClient(Client const &client);
-    void                removeOperator(Client const &client);
+    void                    removeClient(Client const &client);
+    void                    removeOperator(Client const &client);
 
-    void                sendChannelMessage(Client const &client, std::string const &message) const;
+    void                    sendChannelMessage(Client const &client, std::string const &message) const;
 
-    bool                clientIsMember(std::string const &nickname);
-    void                inviteClient(Client const &client);
-    bool                clientIsInvited(Client const &client) const;
-    bool                clientIsOperator(Client const &client) const;
+    bool                    clientIsMember(std::string const &nickname);
+    void                    inviteClient(Client const &client);
+    bool                    clientIsInvited(Client const &client) const;
+    bool                    clientIsOperator(Client const &client) const;
 
-    std::string         getModes();
-    std::string         getModeArguments();
+    std::string             getModes();
+    std::string             getModeArguments();
+
+    std::set<int>           getChannelMembers();
+    std::set<int>           getChannelOperators();
 
     // ? Getters & Setters
 
