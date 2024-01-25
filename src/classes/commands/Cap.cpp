@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:49:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/25 22:41:24 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/25 23:10:16 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,8 @@ Cap::Cap(int const &clientFd, std::vector<std::string> const &vec, Server *serve
 	  client->sendMessage("CAP * ACK :multi-prefix\r\n");
 	  break;
 	}
-	case 2: { // END
-	  client->sendMessage("CAP * END");
-	  client->sendMessage(Messages::getUserWelcome(client->getName(), server->getHost(), client->getNickName(), client->getHostName()));
-	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHost()));
-	  client->sendMessage(Messages::getCreatedAt(client->getNickName(), server->getServerCreationTime()));
-	  client->sendMessage(Messages::getMyInfo(client->getNickName(), server->getHost()));
+	case 2: { // END not used in irssi
+	  //client->sendMessage("CAP * END");
 	  break;
 	}
   }
