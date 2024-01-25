@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/24 20:05:12 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:37:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 13: { // CAP
         Cap cap = Cap(clientFd, vec, this); 
+        // std::cout << "Cap command " << std::endl;
     } break ;
     case 14: { // PART
         Part part = Part(clientFd, vec, this);
