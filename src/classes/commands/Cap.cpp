@@ -6,7 +6,7 @@
 /*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:49:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/25 21:52:19 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:41:24 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Cap::Cap(int const &clientFd, std::vector<std::string> const &vec, Server *serve
 	  break;
 	}
 	case 2: { // END
-	  //client->sendMessage("CAP * END"); //creo que no hace flata
+	  client->sendMessage("CAP * END");
 	  client->sendMessage(Messages::getUserWelcome(client->getName(), server->getHost(), client->getNickName(), client->getHostName()));
 	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHost()));
 	  client->sendMessage(Messages::getCreatedAt(client->getNickName(), server->getServerCreationTime()));
