@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:08:34 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/24 19:45:02 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:32:20 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ Messages::~Messages(void){ return ;}
 
 std::string Messages::getUserWelcome(std::string client, std::string networkname, std::string nickname, std::string userhost)
 {
-  return (std::string("001 ") + client + " :Welcome to the " + networkname + " Network, " + nickname + "!" + userhost);
+  (void) nickname;
+  return (std::string("001 ") + client + " :Welcome to the " + networkname + " Network, " + client + "!" + userhost);
 }
 
 std::string Messages::getYourHost(std::string client, std::string servername)

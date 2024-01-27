@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:32:00 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/25 19:44:37 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:53:39 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,15 @@ User::User(int const &clientFd, std::vector<std::string> const &vec, Server *ser
       for (size_t i = 5; i < vec.size(); i++)
         realName += " " + vec[i];
       client->setRealName(realName);
+      client->setHostName(client->getName()+"@127.0.0.1");
     }
     if (realName[0] == ':')
       realName = realName.substr(1, realName.size() - 1);
     client->setRealName(realName);
+    client->setHostName(client->getName()+"@127.0.0.1");
     // client->sendMessage("You are now registered");
     // std::cout << clientFd << ": User registered" << std::endl;
-
-    client->sendMessage(Messages::getUserWelcome(client->getName(), server->getHost(), client->getNickName(), client->getHostName()));
-	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHost()));
-	  client->sendMessage(Messages::getCreatedAt(client->getNickName(), server->getServerCreationTime()));
-	  client->sendMessage(Messages::getMyInfo(client->getNickName(), server->getHost()));
+    
     return ;
   }    
 }

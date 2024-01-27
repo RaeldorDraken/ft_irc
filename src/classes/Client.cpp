@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 18:36:24 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/14 18:10:09 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:29:40 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Client::Client(int fd)
   _realname = "";
   _nickname = "";
   _buffer = "";
+  _hostname = "@127.0.0.1";
   std::cout << "New client with fd " << this->getClientFd() << std::endl;
 }
 
@@ -42,6 +43,7 @@ Client &Client::operator=(Client const &inst)
   this->_realname = inst._realname;
   this->_nickname = inst._nickname;
   this->_buffer = inst._buffer;
+  this->_hostname = inst._hostname;
   return (*this);
 } // ? = operator assigment. We need to copy ALL private vars 
 
