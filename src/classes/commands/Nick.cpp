@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 12:56:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/05 18:30:46 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:33:21 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   {
     if (vec.size() > 1)    
       client->setNickName(vec[1]);
-    client->sendMessage("Your nick now is " + client->getNickName());
+    // client->sendMessage("Your nick now is " + client->getNickName());
+    client->sendMessage(Messages::getUserWelcome(client->getNickName(), server->getHostName(), client->getNickName(), client->getHostName()));
+	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHostName()));
+	  client->sendMessage(Messages::getCreatedAt(client->getNickName(), server->getServerCreationTime()));
+	  client->sendMessage(Messages::getMyInfo(client->getNickName(), server->getHostName()));
   }
   return ;
 }

@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:08:34 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/17 20:19:26 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:32:20 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ Messages::~Messages(void){ return ;}
 
 std::string Messages::getUserWelcome(std::string client, std::string networkname, std::string nickname, std::string userhost)
 {
-  return (std::string("001 ") + client + " :Welcome to the " + networkname + " Network, " + nickname + "!" + userhost);
+  (void) nickname;
+  return (std::string("001 ") + client + " :Welcome to the " + networkname + " Network, " + client + "!" + userhost);
 }
 
 std::string Messages::getYourHost(std::string client, std::string servername)
@@ -211,6 +212,11 @@ std::string Messages::getUnknownModeFlag(std::string client)
 }
 
 // * MODE
+
+std::string Messages::getEndOfBanList(std::string channel)
+{
+  return(std::string("368 ") + channel + " End of Channel Ban List");
+}
 
 std::string Messages::getChannelModeOptions(std::string client, std::string channel, std::string modes, std::string args)
 {

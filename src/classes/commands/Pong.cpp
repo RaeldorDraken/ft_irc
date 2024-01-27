@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pong.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:44:10 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/10 23:04:06 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:51:07 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Pong::Pong(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   if (vec.size() == 1 && target != NULL)
   // if (vec.size() == 1 && target != NULL)
-    target->sendMessage("PONG with token " + vec[0]);  
+    target->sendMessage("PONG RoabhiDraken" + vec[0]);  
 }
 
 Pong::~Pong(void) {return ;}

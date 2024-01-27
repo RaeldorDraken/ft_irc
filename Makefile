@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+         #
+#    By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 16:55:15 by rabril-h          #+#    #+#              #
-#    Updated: 2024/01/23 10:10:26 by eros-gir         ###   ########.fr        #
+#    Updated: 2024/01/24 20:06:01 by rabril-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ classes/Client classes/Channel classes/ACommand classes/commands/Join \
 classes/commands/Privmsg classes/commands/Pass classes/commands/Nick classes/commands/Cap\
 classes/commands/Real classes/commands/Name classes/commands/Ping classes/commands/Pong \
 classes/commands/Invite classes/commands/Kick classes/commands/Mode classes/commands/Names \
-classes/commands/Topic classes/commands/Part classes/commands/User classes/Messages classes/utils/Utils
+classes/commands/Topic classes/commands/Part classes/commands/User classes/commands/Who classes/Messages classes/utils/Utils
 
 
 src = $(addsuffix .cpp, $(FILES))

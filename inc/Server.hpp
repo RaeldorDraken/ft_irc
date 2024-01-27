@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:20:57 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 22:37:05 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:06:11 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class Server {
     std::string             getServerCreationTime() const;
     std::string             getCurrentTime();
     std::string             getHost() const;
+    std::string             getHostName() const;
     std::string             getPassword() const;
     void                    removeClient(Client const &client);
 
@@ -61,6 +62,7 @@ class Server {
     //bool                      _isServerRunning;
     std::string               _password; // ? our pass for the server
     std::string               _host; // ? our host for the server
+    std::string               _hostname; // ? our hostname -> "RoabhiDrakenBot"
     int                       _port; // ? our port for the server
     struct pollfd             _serverfd; // ? description avobe
     int                       _openConnections; // ? open connections

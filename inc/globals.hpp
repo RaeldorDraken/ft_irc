@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
+/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:06:49 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/23 10:05:24 by eros-gir         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:06:07 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@
 # include "commands/Pong.hpp"
 # include "commands/Part.hpp"
 # include "commands/Cap.hpp"
+# include "commands/Who.hpp"
 
 #endif

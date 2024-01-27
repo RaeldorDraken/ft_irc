@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:51 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/24 18:18:27 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:37:06 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
 {
   const std::string logincmds[4] = {"USER", "NICK", "PASS", "CAP"};
 
-  const std::string commands[15] = {"JOIN", "USER", "NICK", "PRIVMSG",
+  const std::string commands[16] = {"JOIN", "USER", "NICK", "PRIVMSG",
                         "INVITE", "TOPIC", "NAMES", "MODE", "KICK", "PING",
-                        "USER", "NICK", "PASS", "CAP", "PART"};
+                        "USER", "NICK", "PASS", "CAP", "PART", "WHO"};
 
 
   size_t icomm = 0;
@@ -102,9 +102,13 @@ void  Server::_runCommand(std::vector<std::string> vec, int const clientFd)
     } break;
     case 13: { // CAP
         Cap cap = Cap(clientFd, vec, this); 
+        // std::cout << "Cap command " << std::endl;
     } break ;
     case 14: { // PART
         Part part = Part(clientFd, vec, this);
+    } break;
+    case 15: { // WHO
+        Who who = Who(clientFd, vec, this);
     } break;
     default: {
         std::cout << input << " is an unhandled command" << std::endl;
