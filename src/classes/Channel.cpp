@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:10:17 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/24 21:03:13 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:36:15 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,9 @@ void Channel::sendNames(Client const &client) const
     my_client = _server->getClientByFd(*it);
     std::string prefix = "";
     if (this->clientIsOperator(my_client->getClientFd()))
+    {
       prefix = "@";
+    }
     client.sendMessage(Messages::printNamesReply(client.getNickName(), this->_name, prefix, my_client->getNickName()));
   }
   client.sendMessage(Messages::printEndOfNames(client.getNickName(), this->_name));

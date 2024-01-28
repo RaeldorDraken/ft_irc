@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:24:56 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/24 20:11:57 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:30:29 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ Mode::Mode(int const &clientFd, std::vector<std::string> const &vec, Server *ser
 
   Channel *my_channel = server->getServerChannels()[my_channelFd]; // ? Get an instance for the channel
 
-  if (my_vec.size() == 3 && my_vec[2][0] == 'b') // ? If we recieve a MODE b
-  {
-    client->sendMessage(Messages::getEndOfBanList(my_channel->getChannelName())); // ? Send end of banned list 
-    return ;
-  }
+  // if (my_vec.size() == 3 && my_vec[2][0] == 'b') // ? If we recieve a MODE b
+  // {
+  //   client->sendMessage(Messages::getEndOfBanList(my_channel->getChannelName())); // ? Send end of banned list 
+  //   return ;
+  // }
   
 
   if (my_vec.size() == 2 || (my_vec[2][0] != '+' && my_vec[2][0] != '-')) // ? If we are trying to set modes and client is not using + or - reply with available options and instructions

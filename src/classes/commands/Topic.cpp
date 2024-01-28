@@ -6,7 +6,7 @@
 /*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:30:23 by rabril-h          #+#    #+#             */
-/*   Updated: 2024/01/19 18:57:39 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:16:09 by rabril-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
       new_topic.append(" " + vec[i]);
     my_channel->setChannelTopic(new_topic);
     my_channel->sendChannelMessage(0, Messages::getTopic(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic()));
-    my_channel->sendChannelMessage(0, Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic(), server->getCurrentTime()));
+    my_channel->sendChannelMessage(0, Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), client->getNickName(), server->getCurrentTime()));
     
   }
   else // ? Otherwise
@@ -74,7 +74,7 @@ Topic::Topic(int const &clientFd, std::vector<std::string> const &vec, Server *s
     if (my_channel->getChannelTopic() == "") // ? send message to client
     {
       client->sendMessage(Messages::getTopic(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic()));
-      client->sendMessage(Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), my_channel->getChannelTopic(), server->getCurrentTime())); 
+      client->sendMessage(Messages::getTopicWhoWhen(client->getNickName(), my_channel->getChannelName(), client->getNickName(), server->getCurrentTime())); 
     }
     else
       client->sendMessage(Messages::getNoTopic(client->getNickName(), my_channel->getChannelName()));

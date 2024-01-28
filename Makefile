@@ -42,6 +42,7 @@ all:
 	@$(MAKE) $(NAME) #--no-print-directory
 
 $(NAME):: $(OBJ) Makefile
+	@echo "Executable compiled!"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
