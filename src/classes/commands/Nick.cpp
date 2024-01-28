@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabril-h <rabril-h@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: eros-gir <eros-gir@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 12:56:58 by eros-gir          #+#    #+#             */
-/*   Updated: 2024/01/27 17:33:21 by rabril-h         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:42:23 by eros-gir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ Nick::Nick(int const &clientFd, std::vector<std::string> const &vec, Server *ser
   }
   else
   {
-    if (vec.size() > 1)    
+    if (vec.size() > 1 && !server->clientNickNameExists(vec[1]))
       client->setNickName(vec[1]);
+    else
+      return ;
     // client->sendMessage("Your nick now is " + client->getNickName());
     client->sendMessage(Messages::getUserWelcome(client->getNickName(), server->getHostName(), client->getNickName(), client->getHostName()));
 	  client->sendMessage(Messages::getYourHost(client->getNickName(), server->getHostName()));
